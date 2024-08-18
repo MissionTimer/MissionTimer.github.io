@@ -1,173 +1,152 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
-    Hopkins Timer
+    Hopkins TImer
   </title>
 
-    <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/HopkinsTimer/HopkinsTimer.github.io/main/hopkins-150x151.png">
-<p>
-</p>
-<style>
-p {
-  text-align: center;
-  font-size: 60px;
-  margin-top: 0px;
-}
-</style>
+  <link rel="icon" type="image/x-icon"
+    href="https://raw.githubusercontent.com/HopkinsTimer/HopkinsTimer.github.io/main/hopkins-150x151.png">
+  <p>
+  </p>
+  <style>
+    p {
+      text-align: center;
+      font-size: 60px;
+      margin-top: 0px;
+    }
+  </style>
 </head>
 
 <body>
 
   <!-- Display the countdown timer in an element -->
   <p id="demo"></p>
-<audio autoplay loop>
-  <source src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/undertale.ogg?raw=true" type="audio/ogg">
-Your browser does not support the audio element.
-</audio>
+  <audio autoplay loop>
+    <source src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/undertale.mp3?raw=true"
+      type="audio/mpeg">
+    Your browser does not support the audio element.
+  </audio>
   <script>
-  // Set the date we're counting down to
-  var countDownDate = new Date("May 31, 2024 12:35:00").getTime();
-  var currentDate = new Date();
-  if (currentDate.getDate() == 24) {
-    curTime = currentDate.getTime()
-    test_date = new Date("May 24, 2024 8:15:00")
-    distance_from_start = curTime - test_date.getTime()
-    var timeElapsed = 0 + distance_from_start;
-  }
-  if (currentDate.getDate() == 28) {
-    curTime = currentDate.getTime()
-    test_date = new Date("May 28, 2024 8:15:00")
-    distance_from_start = curTime - test_date.getTime()
-    var timeElapsed = 22320000 + distance_from_start;
-  }
-  if (currentDate.getDate() == 29) {
-    curTime = currentDate.getTime()
-    test_date = new Date("May 29, 2024 8:15:00")
-    distance_from_start = curTime - test_date.getTime()
-    var timeElapsed = 44640000 + distance_from_start;
-  }
-  if (currentDate.getDate() == 30) {
-    curTime = currentDate.getTime()
-    test_date = new Date("May 30, 2024 8:15:00")
-    distance_from_start = curTime - test_date.getTime()
-    var timeElapsed = 60240000 + distance_from_start;
-  }
-  if (currentDate.getDate() == 31) {
-    curTime = currentDate.getTime()
-    test_date = new Date("May 31, 2024 8:15:00")
-    distance_from_start = curTime - test_date.getTime()
-    var timeElapsed = 75840000 + distance_from_start;
-  }
-  // Update the count down every 1 second
-  var x = setInterval(function() {
-    timeElapsed += 250
-    console.log(timeElapsed)
-    var currentDate = new Date();
-    // Get today's date and time
-    var now = currentDate.getTime();
-    var reg_days = [24, 28]
-    var min_days = [29, 30, 31]
-    var min_start = new Date
-    min_start.setHours(8, 15, 0)
-    var min_end = new Date()
-    min_end.setHours(12, 35, 0)
-    var reg_start = new Date();
-    reg_start.setHours(8, 15, 0);
-    reg_end = new Date();
-    reg_end.setHours(14, 27, 0)
-    currentDateDate = currentDate.getDate();
-    thurs_fri = new Date('May 24, 2024 8:15:00');
-    fri_tues= new Date('May 28, 2024 8:15:00')
-    tues_wed = new Date('May 29, 2024 8:15:00')
-    wed_thurs = new Date('May 30, 2024 8:15:00')
-    thurs_fri_2 = new Date('May 31, 2024 8:15:00')
-    if (reg_days.includes(currentDateDate)  && currentDate >= reg_start && currentDate <= reg_end) {
-        var distance = 91440000 - timeElapsed;
+    // Set the date we're counting down to
+    var holidays = ['9/2/2024', '11/11/2024', '11/25/2024', '11/26/2024', '11/27/2024', '11/28/2024', '11/29/2024', '12/23/2024', '12/24/2024', '12/25/2024', '12/26/2024', '12/27/2024', '12/30/2024', '12/31/2024', '1/1/2025', '1/2/2025', '1/3/2025', '1/20/2025', '2/17/2025', '4/18/2025', '4/21/2025', '4/22/2025', '4/23/2025', '4/24/2025', '4/25/2025', '5/26/2025']
+    var winter_break = ['12/23/2024', '12/24/2024', '12/25/2024', '12/26/2024', '12/27/2024', '12/30/2024', '12/31/2024', '1/1/2025', '1/2/2025', '1/3/2025', '1/4/2025', '1/5/2025']
+    var thanksgiving_break = ['11/25/2024', '11/26/2024', '11/27/2024', '11/28/2024', '11/29/2024', '11/30/2024', '12/1/2024']
+    var spring_break = ['4/18/2025', '14/19/2024', '14/20/2024', '4/21/2025', '4/22/2025', '4/23/2025', '4/24/2025', '4/25/2025']
+    var minimumDays = ['8/30/2024', '10/22/2024', '10/23/2024', '10/24/2024', '11/22/2024', '4/17/2024']
+    var firstDay = '8/14/2024'
+    var finalExams = ['12/18/2024', '12/19/2024', '12/20/2024', '5/28/2025', '5/29/2025', '5/30/2025']
+    var miscellaneous = ['9/2/2024', '11/11/2024', '1/20/2025', '2/17/2025', '5/26/2025']
 
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-        if (seconds == 0) {
-              var msg = new SpeechSynthesisUtterance();
-              msg.text = days + "days" + hours + "hours" + minutes + "minutes" + seconds + "seconds" + ms + "milliseconds";
-              window.speechSynthesis.speak(msg);
-        }
-        // Display the result in the element with id="demo"
-        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ";
-    }
-    else if (min_days.includes(currentDateDate)  && currentDate >= min_start && currentDate <= min_end) {
-      var distance = 91440000 - timeElapsed;
-
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      var ms = Math.floor((distance % 1000) / 1000);
-      if (seconds == 0) {
-            var msg = new SpeechSynthesisUtterance();
-            msg.text = days + "days" + hours + "hours" + minutes + "minutes" + seconds + "seconds" + ms + "milliseconds";
-            window.speechSynthesis.speak(msg);
+    function getBusinessDatesCount(startDate, endDate) {
+      let count = 0;
+      const curDate = new Date(startDate.getTime());
+      while (curDate <= endDate) {
+        const dayOfWeek = curDate.getDay();
+        const _day = curDate.toLocaleDateString()
+        if (dayOfWeek !== 0 && dayOfWeek !== 6 && !(holidays.includes(_day)) && !(minimumDays.includes(_day)) && firstDay != _day && !(finalExams.includes(_day)) && dayOfWeek !== 4) count++;
+        curDate.setDate(curDate.getDate() + 1);
       }
-
-      // Display the result in the element with id="demo"
-      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s " + ms + "ms ";
+      return count;
     }
 
-    else if (currentDate.getTime() < thurs_fri.getTime()) {
-      var days = 1;
-      var hours = 1;
-      var minutes = 24;
-      var seconds = 0;
-      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
-    }
-    else if (currentDate.getTime() < fri_tues.getTime()) {
-      var days = 0;
-      var hours = 19;
-      var minutes = 12;
-      var seconds = 0;
-      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
+    function getThursdayCount(startDate, endDate) {
+      let count = 0;
+      const curDate = new Date(startDate.getTime());
+      while (curDate <= endDate) {
+        const dayOfWeek = curDate.getDay();
+        if (dayOfWeek === 4) count++;
+        curDate.setDate(curDate.getDate() + 1);
+      }
+      return count;
     }
 
-    else if (currentDate.getTime() < tues_wed.getTime()) {
-      var days = 0;
-      var hours = 13;
-      var minutes = 0;
-      var seconds = 0;
-      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
+    function getShorterDates(startDate, endDate) {
+      let count = 0;
+      const curDate = new Date(startDate.getTime());
+      const _day = curDate.toLocaleDateString()
+      while (curDate <= endDate) {
+        const dayOfWeek = curDate.getDay();
+        if (minimumDays.includes(_day) || finalExams.includes(_day)) count++;
+        curDate.setDate(curDate.getDate() + 1);
+      }
+      return count;
     }
 
-    else if (currentDate.getTime() < wed_thurs.getTime()) {
-      var days = 0
-      var hours = 8
-      var minutes = 40
-      var seconds = 0
-      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
+    // Update the count down every 1 second
+    var isWeekend = false;
+    var notSchoolHours = false;
+    var total_ms = 4356300000;
+    var start_date = new Date('August 14, 2024 08:15:00')
+    var today = new Date();
+    var _today = today.toLocaleDateString();
+    if (winter_break.includes(_today)) {
+      var isWeekend = true;
+      today = new Date('December 20, 2024 05:00:00')
     }
 
-    else if (currentDate.getTime() < thurs_fri_2.getTime()) {
-      var days = 0
-      var hours = 4
-      var minutes = 20
-      var seconds = 0
-      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-      + minutes + "m " + seconds + "s ";
+    if (thanksgiving_break.includes(_today)) {
+      var isWeekend = true;
+      today = new Date('November 22, 2024 05:00:00')
+    }
+
+    if (miscellaneous.includes(_today)) {
+      var isWeekend = true;
+      today.setDate(today.getDate() - 3);
     }
     
-    if (distance < 0) {
-      clearInterval(x);
-      document.getElementById("demo").innerHTML = "EXPIRED";
+    if (today.getDay() == 0) {
+      var isWeekend = true;
+      today.setDate(today.getDate() - 2);
     }
-  }, 250);
+    else if (today.getDay() == 6) {
+      var isWeekend = true;
+      today.setDate(today.getDate() - 1);
+    }
+    today.setHours(8, 15, 0);
+    var daysElapsed = getBusinessDatesCount(start_date, today)
+    var thursdayCount = getThursdayCount(start_date, today)
+    var shorterDatesCount = getShorterDates(start_date, today)
+    total_ms -= 24540000 * daysElapsed;
+    total_ms -= 24300000 * thursdayCount;
+    total_ms -= 17400000 * shorterDatesCount;
+    if (today.toLocaleDateString() !== firstDay) {
+      total_ms -= 17700000;
+    }
+
+
+    var now = new Date();
+    if (now.getHours > 8 && now.getHours < 16) {
+      if (!(now.getHours == 8 && now.getMinutes > 14)) {
+        notSchoolHours = true
+      }
+      if (!(now.getHours == 15 && now.getMinutes < 30)) {
+        notSchoolHours = true
+      }
+    }
+    else {
+      notSchoolHours = true
+    }
+    if (notSchoolHours == true) {
+      now.setHours(15, 19, 0)
+    }
+    var timeElapsed = now.getTime() - today.getTime();
+    total_ms -= timeElapsed;
+    var x = setInterval(function () {
+      if (!(isWeekend) && !(notSchoolHours)) {
+        total_ms -= 1000;
+      }
+      days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
+      hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      minutes = Math.floor((total_ms % (1000 * 60 * 60)) / (1000 * 60));
+      seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
+      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
+
+    }, 1000);
   </script>
 </body>
-  
+
 </html>
