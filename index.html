@@ -151,18 +151,48 @@
     }
     var timeElapsed = now.getTime() - today.getTime();
     total_ms -= timeElapsed;
-    
+
+    function checkPeriod(time) {
+      var localeTimeString = time.toLocaleTimeString();
+      if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
+        return 'First Period';
+      }
+      else if (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' {
+        return 'Second Period';
+      }
+      else if (localeTimeString > '10:33:00' && localeTimeString < '10:54:00' {
+        return 'Read';
+      }
+      else if (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') {
+        return 'Third Period';
+      }
+      else if (localeTimeString > '11:53:00' && localeTimeString < '12:46:00') {
+        return 'Fourth Period';
+      }
+      else if (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') {
+        return 'Lunch';
+      }
+      else if (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') {
+        return 'Fifth Period';
+      }
+      else if (localeTimeString > '14:26:00' && localeTimeString < '15:19:00') {
+        return 'Sixth Period
+      }
+      
+    }
+      
     //update count every second
     var x = setInterval(function () {
       if (!(isWeekend) && !(notSchoolHours)) {
         total_ms -= 1000;
+        var periodCheck = checkPeriod(new Date);
       }
       days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
       hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
       minutes = Math.floor((total_ms % (1000 * 60 * 60)) / (1000 * 60));
       seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
       document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ";
+        + minutes + "m " + seconds + "s " + "       " + periodCheck;
 
     }, 1000);
   </script>
