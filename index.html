@@ -24,6 +24,13 @@
       font-size: 45px;
       margin-top: 0px;
     }
+    schedule {
+      text-align: right;
+      font-size: 40px;
+      position: relative;
+      left: 750px;
+      top: 500px;
+    }
   </style>
 </head>
 
@@ -31,6 +38,7 @@
 
   <!-- Display the countdown timer in an element -->
   <h1 id="demo"></h1>
+  <schedule id="schedule"></schedule>
   <audio autoplay loop>
     <source src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/undertale.mp3?raw=true"
       type="audio/mpeg">
@@ -195,7 +203,9 @@
       minutes = Math.floor((total_ms % (1000 * 60 * 60)) / (1000 * 60));
       seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
       document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s " + "       " + periodCheck;
+        + minutes + "m " + seconds + "s ";
+      document.getElementById("schedule").innerHTML = periodCheck;
+      
 
     }, 1000);
   </script>
