@@ -135,12 +135,12 @@
 
     //do various checks to see if there is school right now
     var now = new Date();
-    if (now.getHours > 8 && now.getHours < 16) {
-      if (!(now.getHours == 8 && now.getMinutes > 14)) {
-        notSchoolHours = true
+    if (now.getHours() > 8 && now.getHours() < 16) {
+      if (!(now.getHours() == 8 && now.getMinutes() > 14)) {
+        notSchoolHours = true;
       }
-      if (!(now.getHours == 15 && now.getMinutes < 30)) {
-        notSchoolHours = true
+      if (!(now.getHours() == 15 && now.getMinutes() < 30)) {
+        notSchoolHours = true;
       }
     }
     else {
