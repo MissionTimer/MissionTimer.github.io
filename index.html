@@ -144,7 +144,7 @@
       }
     }
     else {
-      notSchoolHours = false
+      notSchoolHours = false;
     }
     if (notSchoolHours == true) {
       now.setHours(15, 19, 0)
@@ -186,6 +186,9 @@
       if (!(isWeekend) && !(notSchoolHours)) {
         total_ms -= 1000;
         var periodCheck = checkPeriod(new Date);
+      }
+      else {
+        var periodCheck = 'CLOSED';
       }
       days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
       hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
