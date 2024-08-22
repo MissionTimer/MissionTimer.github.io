@@ -214,7 +214,7 @@
     function timeDif(start, end) {
       starts = new Date()
       ends = new Date()
-      a = start.toLocaleTimeString().split(':')
+      a = start.slice(0:8).toLocaleTimeString().split(':')
       b = end.split(':')
       starts.setHours(a[0], a[1], a[2])
       ends.setHours(b[0], b[1], b[2])
