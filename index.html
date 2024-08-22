@@ -229,18 +229,18 @@
         var periodCheck = 'CLOSED';
       }
       days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
-      hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       minutes = Math.floor((total_ms % (1000 * 60 * 60)) / (1000 * 60));
       seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
       document.getElementById("demo").innerHTML = days + "d " + hours + "h "
         + minutes + "m " + seconds + "s ";
 
       timeToNext = timeDift(new Date(), periodCheck[1][1])
-      h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
       s = Math.floor((timeToNext % (1000 * 60)) / 1000);
       document.getElementById("schedule").innerHTML = periodCheck[0];
-      document.getElementById("next_tome".innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period";
+      document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period";
       
 
     }, 1000);
