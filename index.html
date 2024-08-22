@@ -31,6 +31,13 @@
       left: 1000px;
       top: 300px;
     }
+    next_time {
+      text-align: right;
+      font-size: 35px;
+      position: relative;
+      left: 1000px;
+      top: 350;
+    }
   </style>
 </head>
 
@@ -39,6 +46,7 @@
   <!-- Display the countdown timer in an element -->
   <h1 id="demo"></h1>
   <schedule id="schedule"></schedule>
+  <next_time id="next_time"></next_time>
   <audio autoplay loop>
     <source src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/undertale.mp3?raw=true"
       type="audio/mpeg">
@@ -228,10 +236,11 @@
         + minutes + "m " + seconds + "s ";
 
       timeToNext = timeDift(new Date(), periodCheck[1][1])
-      hourses = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-      minuteses = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
-      secondses = Math.floor((timeToNext % (1000 * 60)) / 1000);
-      document.getElementById("schedule").innerHTML = periodCheck[0] + \n + hourses + "h " + minuteses + "m " + secondses + "s " + "To Next Period";
+      h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
+      s = Math.floor((timeToNext % (1000 * 60)) / 1000);
+      document.getElementById("schedule").innerHTML = periodCheck[0];
+      document.getElementById("next_tome".innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period";
       
 
     }, 1000);
