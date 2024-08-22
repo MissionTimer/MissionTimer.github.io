@@ -160,34 +160,56 @@
     var timeElapsed = now.getTime() - today.getTime();
     total_ms -= timeElapsed;
 
+    let periods = {
+      "first": ['08:30:00', '09:23:00'],
+      "second": ['09:29:00', '09:23:00'],
+      "read": ['10:33:00', '10:22:00'],
+      "third": ['10:54:00', '10:54:00'],
+      "fourth": ['11:53:00', '11:47:00'],
+      "lunch": ['12:46:00', '13:21:00'],
+      "fifth": ['13:27:00', '14:20:00'],
+      "sixth": ['14:26:00', '15:19:00']
+    
+    }
+    
     function checkPeriod(time) {
       var localeTimeString = time.toLocaleTimeString();
       if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
-        return 'First Period';
+        return ['First Period', 'first', 'second'];
       }
       else if (localeTimeString > '09:29:00' && localeTimeString < '10:22:00') {
-        return 'Second Period';
+        return ['Second Period', 'first', 'second'];
       }
       else if (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') {
-        return 'Read';
+        return ['Read', 'read', 'third'];
       }
       else if (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') {
-        return 'Third Period';
+        return ['Third Period', 'third', 'fourth'];
       }
       else if (localeTimeString > '11:53:00' && localeTimeString < '12:46:00') {
-        return 'Fourth Period';
+        return ['Fourth Period', 'fourth', 'lunch'];
       }
       else if (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') {
-        return 'Lunch';
+        return ['Lunch', 'lunch', 'fifth'];
       }
       else if (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') {
-        return 'Fifth Period';
+        return ['Fifth Period', 'fifth', 'sixth];
       }
       else if (localeTimeString > '14:26:00' && localeTimeString < '15:19:00') {
-        return 'Sixth Period';
+        return ['Sixth Period', 'sixth', 'sixth'];
       }
       
     }
+    function timeDif(start, end) {
+      starts = new Date()
+      ends = new Date()
+      a = start.toLocaleTimeString().split(':')
+      b = end.split(':')
+      starts.setHours(a[0], a[1], a[2])
+      ends.setHours(b[0], b[1], b[2])
+      return ends - starts
+    }
+    
       
     //update count every second
     var x = setInterval(function () {
@@ -204,7 +226,12 @@
       seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
       document.getElementById("demo").innerHTML = days + "d " + hours + "h "
         + minutes + "m " + seconds + "s ";
-      document.getElementById("schedule").innerHTML = periodCheck;
+
+      timeToNext = timeDift(new Date(), periodCheck[1][1])
+      hourses = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+      minuteses = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
+      secondses = Math.floor((timeToNext % (1000 * 60)) / 1000);
+      document.getElementById("schedule").innerHTML = periodCheck[0] + \n + hourses + "h " + minuteses + "m " + secondses + "s " + "To Next Period";
       
 
     }, 1000);
