@@ -226,8 +226,8 @@
     var x = setInterval(function () {
       if (!(isWeekend) && !(notSchoolHours)) {
         total_ms -= 1000;
-        var date = new Date()
-        var periodCheck = checkPeriod(date);
+        date = new Date()
+        periodCheck = checkPeriod(date);
         timeToNext = timeDif(date, periods[periodCheck[1]]);
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
@@ -235,7 +235,7 @@
         document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period";
       }
       else {
-        var periodCheck = 'CLOSED';
+        periodCheck = 'CLOSED';
       }
       days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
       hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
