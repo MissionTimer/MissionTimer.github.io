@@ -181,7 +181,7 @@
     }
     
     function checkPeriod(time) {
-      var localeTimeString = time.toLocaleTimeString();
+      var localeTimeString = time.toTimeString();
       if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
         return ['First Period', 'first', 'second'];
       }
