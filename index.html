@@ -170,10 +170,10 @@
 
     let periods = {
       "first": ['08:30:00', '09:23:00'],
-      "second": ['09:29:00', '09:23:00'],
-      "read": ['10:33:00', '10:22:00'],
-      "third": ['10:54:00', '10:54:00'],
-      "fourth": ['11:53:00', '11:47:00'],
+      "second": ['09:29:00', '10:22:00'],
+      "read": ['10:33:00', '10:54:00'],
+      "third": ['10:54:00', '11:47:00'],
+      "fourth": ['11:53:00', '12:46:00'],
       "lunch": ['12:46:00', '13:21:00'],
       "fifth": ['13:27:00', '14:20:00'],
       "sixth": ['14:26:00', '15:19:00']
@@ -229,7 +229,7 @@
         total_ms -= 1000;
         aday = new Date();
         periodCheck = checkPeriod(aday);
-        timeToNext = timeDif(aday, periods[periodCheck[1]]);
+        timeToNext = timeDif(aday, periods[periodCheck[1]][1]);
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
         s = Math.floor((timeToNext % (1000 * 60)) / 1000);
