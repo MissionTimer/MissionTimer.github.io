@@ -285,7 +285,12 @@
         total_ms -= 1000;
         aday = new Date();
         periodCheck = checkPeriod(aday);
-        timeToNext = timeDif(aday, periods[periodCheck[1]][1]);
+        if !(isThursDay) {
+          timeToNext = timeDif(aday, periods[periodCheck[1]][1]);
+        }
+        else {
+          timeToNext = timeDif(aday, periods[periodCheck[1]][2])
+        }
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
         s = Math.floor((timeToNext % (1000 * 60)) / 1000);
