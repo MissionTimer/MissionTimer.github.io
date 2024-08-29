@@ -49,6 +49,25 @@
 
   <!-- Display the countdown timer in an element -->
   <h1 id="demo"></h1>
+  <p>
+    <h1>Some Cool Facts</h1>
+      <ul>
+        <li>There are (probably) 4356300000 ms in this school year</li>
+        <ul><li>That's aproximately 50.42 days!</li></ul>
+        <li>There are (probably) around 206 weekdays from now till the end of school,
+        but there are 25 non-school weekdays</li>
+        <li>Each full day (excluding thursday) is 24540000 ms long!</li>
+        <li>Each thursday is slightly shorter, at 24300000 ms long. </li>
+        <li>Whilst each minimum day is 17400000 ms long, the first day was 17700000 ms long.</li>
+          <ul><li>Finals days are the same length as a regular minimum day</li></ul>
+      </ul>
+  </p>
+  <p>Other stuff: Email me at zajklsjga@gmail.com for ad suggestions! (I also take song requests)</p>
+  <p>I'm also planning on make a new website that can track what is due and when, and just in general help people, 
+    <br>
+    but this may or may not happend depending on how much time I have. Stay tuned! :)</p>
+  <p>Music: https://www.youtube.com/watch?v=8CeYNJ-s0Kw (Undertale OST #071: "Undertale" - Toby Fox)</p>
+  <p><br></p>
   <schedule id="schedule"></schedule>
   <next_time id="next_time"></next_time>
   <audio autoplay loop>
@@ -94,7 +113,10 @@
       }
       return count;
     }
-
+    isThursDay = false;
+    if (dayOfWeek === 4) {
+      isThursDay = true;
+    }
     //grabs all the "shorter" dates between two dates
     function getShorterDates(startDate, endDate) {
       let count = 0;
@@ -174,43 +196,72 @@
     total_ms -= timeElapsed;
 
     let periods = {
-      "first": ['08:30:00', '09:23:00'],
-      "second": ['09:29:00', '10:22:00'],
+      "first": ['08:30:00', '09:23:00', '09:18:00'],
+      "second": ['09:29:00', '10:22:00', '10:12:00'],
       "read": ['10:33:00', '10:54:00'],
-      "third": ['10:54:00', '11:47:00'],
-      "fourth": ['11:53:00', '12:46:00'],
-      "lunch": ['12:46:00', '13:21:00'],
-      "fifth": ['13:27:00', '14:20:00'],
-      "sixth": ['14:26:00', '15:19:00']
-    
+      "third": ['10:54:00', '11:47:00', '11:59:00'],
+      "fourth": ['11:53:00', '12:46:00', '12:53:00'],
+      "lunch": ['12:46:00', '13:21:00', '13:27:00'],
+      "fifth": ['13:27:00', '14:20:00', '14:21:00'],
+      "sixth": ['14:26:00', '15:19:00', '15:15:00'],
+      "advisory": ['10:23:00', '11:05:00']
+
     }
     
     function checkPeriod(time) {
       var localeTimeString = time.toTimeString();
-      if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
-        return ['First Period', 'first', 'second'];
-      }
-      else if (localeTimeString > '09:29:00' && localeTimeString < '10:22:00') {
-        return ['Second Period', 'first', 'second'];
-      }
-      else if (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') {
-        return ['Read', 'read', 'third'];
-      }
-      else if (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') {
-        return ['Third Period', 'third', 'fourth'];
-      }
-      else if (localeTimeString > '11:53:00' && localeTimeString < '12:46:00') {
-        return ['Fourth Period', 'fourth', 'lunch'];
-      }
-      else if (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') {
-        return ['Lunch', 'lunch', 'fifth'];
-      }
-      else if (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') {
-        return ['Fifth Period', 'fifth', 'sixth'];
-      }
-      else if (localeTimeString > '14:26:00' && localeTimeString < '15:19:00') {
-        return ['Sixth Period', 'sixth', 'sixth'];
-      }
+      if !(isThursDay) {
+        if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
+          return ['First Period', 'first', 'second'];
+        }
+        else if (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && !(isThursDay)) {
+          return ['Second Period', 'first', 'second'];
+        }
+        else if (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') {
+          return ['Read', 'read', 'third'];
+        }
+        else if (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') {
+          return ['Third Period', 'third', 'fourth'];
+        }
+        else if (localeTimeString > '11:53:00' && localeTimeString < '12:46:00') {
+          return ['Fourth Period', 'fourth', 'lunch'];
+        }
+        else if (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') {
+          return ['Lunch', 'lunch', 'fifth'];
+        }
+        else if (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') {
+          return ['Fifth Period', 'fifth', 'sixth'];
+        }
+        else if (localeTimeString > '14:26:00' && localeTimeString < '15:19:00') {
+          return ['Sixth Period', 'sixth', 'sixth'];
+        }
+    }
+      else if (isThursDay) {
+        if (localeTimeString > '10:23:00' && localeTimeString < '11:05:00' && isThursDay) {
+          return ['Advisory', 'advisory', 'third'];
+        }
+        if (localeTimeString > '08:30:00' && localeTimeString < '09:18:00') {
+          return ['First Period', 'first', 'second'];
+        }
+        else if (localeTimeString > '09:24:00' && localeTimeString < '10:12:00' && !(isThursDay)) {
+          return ['Second Period', 'first', 'second'];
+        }
+        else if (localeTimeString > '11:11:00' && localeTimeString < '11:59:00') {
+          return ['Third Period', 'third', 'fourth'];
+        }
+        else if (localeTimeString > '12:05' && localeTimeString < '12:53:00') {
+          return ['Fourth Period', 'fourth', 'lunch'];
+        }
+        else if (localeTimeString > '12:53:00' && localeTimeString < '13:27:00') {
+          return ['Lunch', 'lunch', 'fifth'];
+        }
+        else if (localeTimeString > '13:33:00' && localeTimeString < '14:21:00') {
+          return ['Fifth Period', 'fifth', 'sixth'];
+        }
+        else if (localeTimeString > '14:27:00' && localeTimeString < '15:15:00') {
+          return ['Sixth Period', 'sixth', 'sixth'];
+        }
+    }
       else {
         return ['CLOSED']
       }
@@ -241,7 +292,7 @@
         document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period";
       }
       else {
-        periodCheck = 'CLOSED';
+        periodCheck = ['CLOSED'];
       }
       days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
       hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
@@ -256,25 +307,7 @@
 
     }, 1000);
   </script>
-  <p>
-    <h1>Some Cool Facts</h1>
-      <ul>
-        <li>There are (probably) 4356300000 ms in this school year</li>
-        <ul><li>That's aproximately 50.42 days!</li></ul>
-        <li>There are (probably) around 206 weekdays from now till the end of school,
-        but there are 25 non-school weekdays</li>
-        <li>Each full day (excluding thursday) is 24540000 ms long!</li>
-        <li>Each thursday is slightly shorter, at 24300000 ms long. </li>
-        <li>Whilst each minimum day is 17400000 ms long, the first day was 17700000 ms long.</li>
-          <ul><li>Finals days are the same length as a regular minimum day</li></ul>
-      </ul>
-  </p>
-  <p>Other stuff: Email me at zajklsjga@gmail.com for ad suggestions! (I also take song requests)</p>
-  <p>I'm also planning on make a new website that can track what is due and when, and just in general help people, 
-    <br>
-    but this may or may not happend depending on how much time I have. Stay tuned! :)</p>
-  <p>Music: https://www.youtube.com/watch?v=8CeYNJ-s0Kw (Undertale OST #071: "Undertale" - Toby Fox)</p>
-  <p><br></p>
+
 </body>
 
 </html>
