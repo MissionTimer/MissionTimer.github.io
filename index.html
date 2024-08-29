@@ -114,6 +114,8 @@
       return count;
     }
     isThursDay = false;
+    const curDate = new Date(startDate.getTime());
+    const dayOfWeek = curDate.getDay();
     if (dayOfWeek === 4) {
       isThursDay = true;
     }
