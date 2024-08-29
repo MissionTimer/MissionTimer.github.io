@@ -210,11 +210,11 @@
     
     function checkPeriod(time) {
       var localeTimeString = time.toTimeString();
-      if !(isThursDay) {
+      if (!(isThursDay)) {
         if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
           return ['First Period', 'first', 'second'];
         }
-        else if (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && !(isThursDay)) {
+        else if (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay))) {
           return ['Second Period', 'first', 'second'];
         }
         else if (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') {
@@ -243,7 +243,7 @@
         if (localeTimeString > '08:30:00' && localeTimeString < '09:18:00') {
           return ['First Period', 'first', 'second'];
         }
-        else if (localeTimeString > '09:24:00' && localeTimeString < '10:12:00' && !(isThursDay)) {
+        else if (localeTimeString > '09:24:00' && localeTimeString < '10:12:00') {
           return ['Second Period', 'first', 'second'];
         }
         else if (localeTimeString > '11:11:00' && localeTimeString < '11:59:00') {
@@ -285,7 +285,7 @@
         total_ms -= 1000;
         aday = new Date();
         periodCheck = checkPeriod(aday);
-        if !(isThursDay) {
+        if (!(isThursDay)) {
           timeToNext = timeDif(aday, periods[periodCheck[1]][1]);
         }
         else {
