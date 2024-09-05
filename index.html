@@ -353,7 +353,15 @@
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
         s = Math.floor((timeToNext % (1000 * 60)) / 1000);
-        document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period";
+        if isThursDay {
+          total_period_time = 2880000
+        }
+        else {
+          total_period_time = 3180000
+        }
+        time_past = total_period_time - timeToNext
+        percent_time = Math.round((time_past / total_period_time) * 10000)/100
+        document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period" + "               " + percent_time + "% of time past";
       }
       else {
         periodCheck = ['CLOSED'];
