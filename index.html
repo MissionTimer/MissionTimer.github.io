@@ -399,10 +399,15 @@
           if (periodCheck[1] === 'lunch') {
             total_period_time = 2040000;
           }
-          if (periodCheck[1] === '
+          if (periodCheck[1] === 'advisory') {
+            total_period_time = 2520000;
+          }
         }
           else {
             total_period_time = 3180000
+            if (periodCheck[1] === 'read') {
+              total_period_time = 1260000;
+            }
           }  
         }
         
