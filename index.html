@@ -353,7 +353,7 @@
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
         s = Math.floor((timeToNext % (1000 * 60)) / 1000);
-        if isThursDay {
+        if (isThursDay) {
           total_period_time = 2880000
         }
         else {
@@ -361,9 +361,21 @@
         }
         time_past = total_period_time - timeToNext
         percent_time = Math.round((time_past / total_period_time) * 10000)/100
-        document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period" + "               " + percent_time + "% of time past";
+        document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period " + "               " + percent_time + "% of time past";
+        document.getElementById("schedule").innerHTML = periodCheck[0];
       }
       else {
+        var tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(8, 30, 0);
+        var now = new Date();
+        timeToNext = tomorrow.getTime() - now.getTime()
+        
+        h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
+        s = Math.floor((timeToNext % (1000 * 60)) / 1000);
+        
+        document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To the start of school "
         periodCheck = ['CLOSED'];
       }
       days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
@@ -374,7 +386,6 @@
         + minutes + "m " + seconds + "s ";
 
 
-      document.getElementById("schedule").innerHTML = periodCheck[0];
       
 
     }, 1000);
