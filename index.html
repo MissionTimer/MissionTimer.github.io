@@ -209,6 +209,7 @@
       "sixth": ['14:26:00', '15:19:00', '15:15:00'],
       "advisory": ['10:23:00', '11:05:00', '11:05:00'],
       "in_between_thurs": ['09:24:00', '10:23:00', '11:11:00', '12:05:00', '12:53:00', '01:33:00', '02:27:00'] 
+      "in_between": ['09:29:00', '10:33:00', '10:54:00', '12:46:00', '01:27:00', '02:26:00']
 
     }
     
@@ -389,12 +390,22 @@
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
         s = Math.floor((timeToNext % (1000 * 60)) / 1000);
-        if (isThursDay) {
-          total_period_time = 2880000
+        if (periodCheck[1] === 'lunch' && !(isThursDay)) {
+          total_period_time = 2100000;
         }
         else {
-          total_period_time = 3180000
+          if (isThursDay) {
+          total_period_time = 2880000;
+          if (periodCheck[1] === 'lunch') {
+            total_period_time = 2040000;
+          }
+          if (periodCheck[1] === '
         }
+          else {
+            total_period_time = 3180000
+          }  
+        }
+        
         time_past = total_period_time - timeToNext
         percent_time = Math.round((time_past / total_period_time) * 10000)/100
         document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period " + "               " + percent_time + "% of time past";
