@@ -377,6 +377,7 @@
         
         document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To the start of school "
         periodCheck = ['CLOSED'];
+        document.getElementById("schedule").innerHTML = periodCheck[0];
       }
       days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
       hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
