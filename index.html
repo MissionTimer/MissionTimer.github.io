@@ -97,7 +97,7 @@
       while (curDate <= endDate) {
         const dayOfWeek = curDate.getDay();
         const _day = curDate.toLocaleDateString()
-        if (dayOfWeek !== 0 && dayOfWeek !== 6 && !(holidays.includes(_day)) && !(minimumDays.includes(_day)) && firstDay != _day && !(finalExams.includes(_day)) && dayOfWeek !== 4) count++;
+        if (dayOfWeek !== 0 && dayOfWeek !== 6 && !(holidays.includes(_day)) && !(minimumDays.includes(_day)) && firstDay !== _day && !(finalExams.includes(_day)) && dayOfWeek !== 4) count++;
         curDate.setDate(curDate.getDate() + 1);
       }
       return count;
@@ -214,21 +214,21 @@
     }
     
     function nextWeekDay(day) {
-      tomorrow = day.getDate() + 1;
+      let tomorrow = new Date(day);
+      tomorrow.setDate(day.getDate() + 1);
       days_past = 1
       dateFound = false;
       while (!(dateFound)) {
-        if (tomorrow.getDay() != 6 && tomorrow.getDay() != 0 && !(holidays.includes(tomorrow.toLocaleDateString()))) {
+        if (tomorrow.getDay() !== 6 && tomorrow.getDay() !== 0 && !(holidays.includes(tomorrow.toLocaleDateString()))) {
           dateFound = true;
           return [tomorrow, days_past]; 
           break;
         }
         else {
-          tomorrow.getDate() += 1;
+          tomorrow.setDate(tomorrow.getDate() + 1);
           days_past += 1;
         }
 
-      
       }
     }
     
@@ -436,17 +436,23 @@
         document.getElementById("schedule").innerHTML = periodCheck[0];
       }
       else {
-        var tomorrow = new Date();
-        var now = new Date();
+        tomorrow = new Date();
+        now = new Date();
         tomorrow = (nextWeekDay(now))[0];
         tomorrow.setHours(8, 30, 0);
         timeToNext = tomorrow.getTime() - now.getTime()
         
+        d = Math.floor(timeToNext / (1000 * 60 * 60 * 24))
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
         s = Math.floor((timeToNext % (1000 * 60)) / 1000);
+        if (d !== 0) {
+          document.getElementById("next_time").innerHTML = d + "d " + h + "h " + m + "m " + s + "s " + "To the start of school "
+        }
+        else {
+          document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To the start of school "
+        }
         
-        document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To the start of school "
         periodCheck = ['CLOSED'];
         document.getElementById("schedule").innerHTML = periodCheck[0];
       }
