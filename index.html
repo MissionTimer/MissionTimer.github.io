@@ -94,7 +94,7 @@
     function getBusinessDatesCount(startDate, endDate) {
       let count = 0;
       const curDate = new Date(startDate.getTime());
-      while (curDate <= endDate) {
+      while (curDate.getTime() <= endDate.getTime()) {
         let dayOfWeek = curDate.getDay();
         let _day = curDate.toLocaleDateString()
         if ((dayOfWeek !== 0 && dayOfWeek !== 6 && !(holidays.includes(_day)) && !(minimumDays.includes(_day)) && firstDay !== _day && !(finalExams.includes(_day)) && dayOfWeek !== 4) || (_day === '8/16/2024') || (_day === '8/23/2024')) count++;
@@ -107,7 +107,7 @@
     function getThursdayCount(startDate, endDate) {
       let count = 0;
       const curDate = new Date(startDate.getTime());
-      while (curDate <= endDate) {
+      while (curDate.getTime() <= endDate.getTime()) {
         let dayOfWeek = curDate.getDay();
         if (dayOfWeek === 4 && !(curDate.toLocaleDateString() !== '8/16/2024') && !(curDate.toLocaleDateString() !== '8/23/2024')) count++;
         curDate.setDate(curDate.getDate() + 1);
@@ -126,7 +126,7 @@
       let count = 0;
       const curDate = new Date(startDate.getTime());
       _day = curDate.toLocaleDateString()
-      while (curDate <= endDate) {
+      while (curDate.getTime() <= endDate.getTime()) {
         _day = curDate.toLocaleDateString()
         if (minimumDays.includes(_day) || finalExams.includes(_day)) count++;
         curDate.setDate(curDate.getDate() + 1);
