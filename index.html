@@ -120,13 +120,14 @@
     if (dayOfWeek === 4) {
       isThursDay = true;
     }
+    
     //grabs all the "shorter" dates between two dates
     function getShorterDates(startDate, endDate) {
       let count = 0;
       const curDate = new Date(startDate.getTime());
-      const _day = curDate.toLocaleDateString()
+      _day = curDate.toLocaleDateString()
       while (curDate <= endDate) {
-        const dayOfWeek = curDate.getDay();
+        _day = curDate.toLocaleDateString()
         if (minimumDays.includes(_day) || finalExams.includes(_day)) count++;
         curDate.setDate(curDate.getDate() + 1);
       }
