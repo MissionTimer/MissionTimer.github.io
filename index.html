@@ -192,10 +192,12 @@
     else {
       notSchoolHours = false;
     }
-    if (notSchoolHours == true) {
+    if (notSchoolHours === true) {
       now.setHours(15, 19, 0)
     }
-    var timeElapsed = now.getTime() - today.getTime();
+    else {
+        timeElapsed = now.getTime() - today.getTime();
+    }
     total_ms -= timeElapsed;
 
     let periods = {
