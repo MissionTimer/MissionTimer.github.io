@@ -109,7 +109,7 @@
       const curDate = new Date(startDate.getTime());
       while (curDate <= endDate) {
         let dayOfWeek = curDate.getDay();
-        if (dayOfWeek === 4 && (curDate.toLocaleDateString() !== '8/16/2024') && (curDarte.toLocaleDateString() !== '8/23/2024') count++;
+        if (dayOfWeek === 4 && (curDate.toLocaleDateString() !== '8/16/2024') && (curDarte.toLocaleDateString() !== '8/23/2024')) count++;
         curDate.setDate(curDate.getDate() + 1);
       }
       return count;
