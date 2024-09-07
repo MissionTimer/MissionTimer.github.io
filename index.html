@@ -179,7 +179,8 @@
       total_ms -= 17700000;
     }
 
-    //do various checks to see if there is school right now
+    if (!(isWeekend)) {
+      //do various checks to see if there is school right now
     var now = new Date();
     if (!(now.getHours() > 8 && now.getHours() < 16)) {
       if (!(now.getHours() == 8 && now.getMinutes() > 14)) {
@@ -195,10 +196,10 @@
     if (notSchoolHours === true) {
       now.setHours(15, 19, 0)
     }
-    else {
-        timeElapsed = now.getTime() - today.getTime();
-    }
+    timeElapsed = now.getTime() - today.getTime();
     total_ms -= timeElapsed;
+    }
+    
 
     let periods = {
       "first": ['08:30:00', '09:23:00', '09:18:00'],
