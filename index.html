@@ -217,7 +217,7 @@
       tomorrow = day.getDate() + 1;
       days_past = 1
       dateFound = false;
-      while !(dateFound) {
+      while (!(dateFound)) {
         if (tomorrow.getDay() != 6 && tomorrow.getDay() != 0 && !(holidays.includes(tomorrow.toLocaleDateString()))) {
           dateFound = true;
           return [tomorrow, days_past]; 
