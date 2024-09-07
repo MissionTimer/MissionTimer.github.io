@@ -213,6 +213,25 @@
 
     }
     
+    function nextWeekDay(day) {
+      tomorrow = day.getDate() + 1;
+      days_past = 1
+      dateFound = false;
+      while !(dateFound) {
+        if (tomorrow.getDay() != 6 && tomorrow.getDay() != 0 && !(holidays.includes(tomorrow.toLocaleDateString()))) {
+          dateFound = true;
+          return [tomorrow, days_past]; 
+          break;
+        }
+        else {
+          tomorrow.getDate() += 1;
+          days_past += 1;
+        }
+
+      
+      }
+    }
+    
     function checkPeriod(time) {
       var localeTimeString = time.toTimeString();
       if (!(isThursDay)) {
@@ -418,9 +437,9 @@
       }
       else {
         var tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        tomorrow.setHours(8, 30, 0);
         var now = new Date();
+        tomorrow = (nextWeekDay(now))[0];
+        tomorrow.setHours(8, 30, 0);
         timeToNext = tomorrow.getTime() - now.getTime()
         
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
