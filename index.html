@@ -96,7 +96,7 @@
       const curDate = new Date(startDate.getTime());
       while (curDate.getTime() <= endDate.getTime()) {
         let dayOfWeek = curDate.getDay();
-        let _day = curDate.toLocaleDateString()
+        _day = curDate.toLocaleDateString()
         if ((dayOfWeek !== 0 && dayOfWeek !== 6 && !(holidays.includes(_day)) && !(minimumDays.includes(_day)) && firstDay !== _day && !(finalExams.includes(_day)) && dayOfWeek !== 4) || (_day == '8/16/2024') || (_day == '8/23/2024')) count++;
         curDate.setDate(curDate.getDate() + 1);
       }
@@ -109,7 +109,7 @@
       const curDate = new Date(startDate.getTime());
       while (curDate.getTime() <= endDate.getTime()) {
         let dayOfWeek = curDate.getDay();
-        if (dayOfWeek === 4 && curDate.toLocaleDateString() != '8/16/2024' && curDate.toLocaleDateString() != '8/23/2024') count++;
+        if (dayOfWeek === 4 && (curDate.toLocaleDateString() != '8/16/2024') && (curDate.toLocaleDateString() != '8/23/2024')) count++;
         curDate.setDate(curDate.getDate() + 1);
       }
       return count;
