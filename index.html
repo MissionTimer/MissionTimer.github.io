@@ -24,34 +24,55 @@
       margin-top: 0px;
     }
     schedule {
-      text-align: right;
+      text-align: center;
       font-size: 40px;
       position: absolute;
-      left: 700px;
-      top: 150px;
+      left: 1000px;
+      top: 350px;
     }
     next_time {
       text-align: center;
       font-size: 35px;
       position: absolute;
-      left: 500x;
-      top: 200px;
+      right: 500px;
+      top: 300px;
     }
     img {
       position: absolute;
-      left: 500px;
-      top: 100px;
+      left: 100px;
+      top: 1000px;
     }
+    .container {
+
+      justify-content: flex-end;
+      width: 100%;
+      display: flex;
+      flex-flow: column;
+      gap: 5px;
+      
+    }
+    .container > div {
+    
+    margin: 1px;
+    padding: 1px;
+    font-size: 30px;
+  }
     
   </style>
+</head>
 </head>
 
 <body>
 
   <!-- Display the countdown timer in an element -->
   <h1 id="demo"></h1>
+  <h1>Some Cool Facts</h1>
+  <div class="container">  
+  <div id="schedule"></div>
+  <div id="next_time"></div>
+  </div>
   <p>
-    <h1>Some Cool Facts</h1>
+    <br>
       <ul>
         <li>There are (probably) 4356300000 ms in this school year</li>
         <ul><li>That's aproximately 50.42 days!</li></ul>
@@ -69,8 +90,6 @@
     but this may or may not happend depending on how much time I have. Stay tuned! :)</p>
   <p>Music: https://www.youtube.com/watch?v=8CeYNJ-s0Kw (Undertale OST #071: "Undertale" - Toby Fox)</p>
   <p><br></p>
-  <schedule id="schedule"></schedule>
-  <next_time id="next_time"></next_time>
   <audio autoplay loop>
     <source src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/undertale.mp3?raw=true"
       type="audio/mpeg">
