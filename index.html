@@ -188,10 +188,10 @@
     }
 
     //initiate days between dates following a certain condition, subtract ms from total
-    today.setHours(8, 15, 0);
-    var daysElapsed = getBusinessDatesCount(start_date, today)
-    var thursdayCount = getThursdayCount(start_date, today)
-    var shorterDatesCount = getShorterDates(start_date, today)
+    today.setHours(8, 30, 0);
+    daysElapsed = getBusinessDatesCount(start_date, today)
+    thursdayCount = getThursdayCount(start_date, today)
+    shorterDatesCount = getShorterDates(start_date, today)
     total_ms -= 24540000 * daysElapsed;
     total_ms -= 24300000 * thursdayCount;
     total_ms -= 17400000 * shorterDatesCount;
@@ -414,20 +414,76 @@
       ends.setHours(b[0], b[1], b[2])
       return ends - starts
     }
-    
-      
+
+    ahora = new Date();
+    aday = new Date();
     //update count every second
+    total_mses = total_ms;
     var x = setInterval(function () {
-      aday = new Date();
+    today = new Date(ahora)
+    today.setHours(8, 30, 0)
+    if (today.getDay() == 0) {
+      isWeekend = true;
+      today.setDate(today.getDate() - 2);
+    }
+    else if (today.getDay() == 6) {
+      isWeekend = true;
+      today.setDate(today.getDate() - 1);
+    }
+    else {
+      isWeekend = false;
+    }
       if (!(isWeekend) && !(notSchoolHours)) {
-        total_ms -= 1000;
-        aday = new Date();
-        periodCheck = checkPeriod(aday);
+        console.log(ahora.toTimeString())
+        
+        /*
+        var daysElapsed2 = getBusinessDatesCount(start_date, today)
+        var thursdayCount2 = getThursdayCount(start_date, today)
+        var shorterDatesCount2 = getShorterDates(start_date, today)
+        if (daysElapsed2 !== daysElapsed) {
+          total_ms -= 24540000 * (daysElapsed2 - daysElapsed);
+          daysElapsed = daysElapsed2;
+        }
+        if (thursdayCount2 !== thursdayCount) {
+          total_ms -= 24300000 * (thursdayCount2 - thursdayCount);
+          thursdayCount = thursdayCount2;
+        }
+        if (shorterDatesCount2 !== shorterDatesCount) {
+          total_ms -= 17400000 * (shorterDatesCount - shorterDatesCount);
+          shorterDatesCount = shorterDatesCount2;
+        }
+        */
+    today.setHours(8, 30, 0);
+    daysElapsed = getBusinessDatesCount(start_date, today)
+    thursdayCount = getThursdayCount(start_date, today)
+    shorterDatesCount = getShorterDates(start_date, today)
+    if (!(isWeekend)) {
+      right_now = new Date(ahora)
+      //do various checks to see if there is school right now
+      if (!(ahora.getHours() > 8 && ahora.getHours() < 16)) {
+        if (!(ahora.getHours() == 8 && ahora.getMinutes() > 14)) {
+          notSchoolHours = true;
+        }
+        if (!(ahora.getHours() == 15 && ahora.getMinutes() < 30)) {
+          notSchoolHours = true;
+        }
+      }
+      else {
+        notSchoolHours = false;
+      }
+      if (notSchoolHours === true) {
+        right_now.setHours(15, 19, 0)
+      total_ms = total_mses - (right_now.getTime() - today.getTime());
+    }
+
+
+    }
+        periodCheck = checkPeriod(ahora);
         if (!(isThursDay)) {
-          timeToNext = timeDif(aday, periods[periodCheck[1]][1]);
+          timeToNext = timeDif(ahora, periods[periodCheck[1]][1]);
         }
         else {
-          timeToNext = timeDif(aday, periods[periodCheck[1]][2])
+          timeToNext = timeDif(ahora, periods[periodCheck[1]][2])
         }
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
@@ -460,10 +516,9 @@
       }
       else {
         tomorrow = new Date();
-        now = new Date();
-        tomorrow = (nextWeekDay(now))[0];
+        tomorrow = (nextWeekDay(ahora))[0];
         tomorrow.setHours(8, 30, 0);
-        timeToNext = tomorrow.getTime() - now.getTime()
+        timeToNext = tomorrow.getTime() - ahora.getTime()
         
         d = Math.floor(timeToNext / (1000 * 60 * 60 * 24))
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
