@@ -421,7 +421,7 @@
     aday = new Date();
     //update count every second
     var x = setInterval(function () {
-    ahora.setTime(ahora.getTime() + 1000);
+    ahora = new Date();
     right_now = new Date(ahora)
     today = new Date(ahora)
     today.setHours(8, 30, 0)
@@ -484,10 +484,20 @@
 
       periodCheck = checkPeriod(ahora);
       if (!(isThursDay)) {
-        timeToNext = timeDif(ahora, periods[periodCheck[1]][1]);
+        if (periodCheck[1] === "in_between") {
+          timeToNext = timeDif(ahora, periods[periodCheck[1]][periodCheck[2]]);
+        }
+        else {
+          timeToNext = timeDif(ahora, periods[periodCheck[1]][1]);
+        }
       }
       else {
-        timeToNext = timeDif(ahora, periods[periodCheck[1]][2])
+        if (periodCheck[1] === "in_between_thurs") {
+            timeToNext = timeDif(ahora, periods[periodCheck[1]][periodCheck[2]]);
+        }
+        else {
+          timeToNext = timeDif(ahora, periods[periodCheck[1]][2])
+        }
       }
       h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
