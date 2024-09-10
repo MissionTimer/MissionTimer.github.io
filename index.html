@@ -56,6 +56,23 @@
     margin: 1px;
     padding: 1px;
     font-size: 30px;
+
+  }
+    .container2 {
+
+    display: flex;
+    flex-flow: column;
+    gap: 100px;
+
+  }
+
+  .container2 > div {
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+  }
+  input.box {
+    transform: scale(2);
   }
     
   </style>
@@ -65,11 +82,11 @@
 <body>
 
   <!-- Display the countdown timer in an element -->
-  <h1 id="demo"></h1>
+  <h1 id="demo">LOADING...</h1>
   <h1>Some Cool Facts</h1>
   <div class="container">  
-  <div id="schedule"></div>
-  <div id="next_time"></div>
+  <div id="schedule">LOADING...</div>
+  <div id="next_time">LOADING...</div>
   </div>
   <p>
     <br>
@@ -90,6 +107,14 @@
     but this may or may not happend depending on how much time I have. Stay tuned! :)</p>
   <p>Music: https://www.youtube.com/watch?v=8CeYNJ-s0Kw (Undertale OST #071: "Undertale" - Toby Fox)</p>
   <p><br></p>
+  <div class="container2">
+  <div><input type="checkbox" id="1" class="box">     Period 1 HW</input><div>
+  <div><input type="checkbox" id="2" class="box">     Period 2 HW</input></div>
+  <div><input type="checkbox" id="3" class="box">     Period 3 HW</input></div>
+  <div><input type="checkbox" id="4" class="box">     Period 4 HW</input></div>
+  <div><input type="checkbox" id="5" class="box">     Period 5 HW</input></div>
+  <div><input type="checkbox" id="6" class="box">     Period 6 HW</input></div>
+  </div>
   <audio autoplay loop>
     <source src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/undertale.mp3?raw=true"
       type="audio/mpeg">
@@ -97,6 +122,31 @@
   </audio>
   <img src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/cat.jpg?raw=true" width="213px" height="142px">
   <script>
+    //checkboxes
+    console.log(new Date().getTime())
+    let boxes = document.getElementsByClassName('box').length;
+
+    function save() {	
+      for(let i = 1; i <= boxes; i++){
+        var checkbox = document.getElementById(String(i));
+        localStorage.setItem("checkbox" + String(i), checkbox.checked);	
+      }
+    }
+
+    //for loading
+    for(let i = 1; i <= boxes; i++){
+      if(localStorage.length > 0){
+        var checked = JSON.parse(localStorage.getItem("checkbox" + String(i)));
+        document.getElementById(String(i)).checked = checked;
+      }
+    }
+    window.addEventListener('change', save);
+
+
+    //checkboxes 
+
+
+    
     // Set the date we're counting down to
     ahora = new Date();
     //set the various days that are different
@@ -235,8 +285,8 @@
       "fifth": ['13:27:00', '14:20:00', '14:21:00'],
       "sixth": ['14:26:00', '15:19:00', '15:15:00'],
       "advisory": ['10:23:00', '11:05:00', '11:05:00'],
-      "in_between_thurs": ['09:24:00', '10:23:00', '11:11:00', '12:05:00', '12:53:00', '01:33:00', '02:27:00'], 
-      "in_between": ['09:29:00', '10:33:00', '10:54:00', '12:46:00', '01:27:00', '02:26:00']
+      "in_between_thurs": ['09:24:00', '10:23:00', '11:11:00', '12:05:00', '12:53:00', '13:33:00', '14:27:00'], 
+      "in_between": ['09:29:00', '10:33:00', '10:54:00', '11:53:00', '12:46:00', '13:27:00', '14:26:00']
     }
     
     function nextWeekDay(day) {
@@ -260,13 +310,15 @@
     
     function checkPeriod(time) {
       var localeTimeString = time.toTimeString();
+      to_be_returned = ['CLOSED_TEST']
       if (!(isThursDay)) {
         if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
-          return ['First Period', 'first', 'second'];
+          to_be_returned = ['First Period', 'first', 'second'];
         }
         else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
                 || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
-                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))) {
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '09:30:00')) {
           return ['Passing Period', 'in_between', 0]
         }
         if (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay))) {
@@ -274,7 +326,8 @@
         }
         else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
                 || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
-                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))) {
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '10:35:00')) {
           return ['Passing Period', 'in_between', 1]
         }
         if (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') {
@@ -282,7 +335,8 @@
         }
         else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
                 || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
-                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))) {
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '10:55:00')) {
           return ['Passing Period', 'in_between', 2]
         }
         if (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') {
@@ -290,7 +344,8 @@
         }
         else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
                 || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
-                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))) {
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '11:55:00')) {
           return ['Passing Period', 'in_between', 3]
         }
         if (localeTimeString > '11:53:00' && localeTimeString < '12:46:00') {
@@ -298,7 +353,8 @@
         }
         else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
                 || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
-                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))) {
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '12:50:00')) {
           return ['Passing Period', 'in_between', 4]
         }
         if (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') {
@@ -306,7 +362,8 @@
         }
         else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
                 || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
-                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))) {
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '13:30:00')) {
           return ['Passing Period', 'in_between', 5]
         }
         if (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') {
@@ -314,7 +371,8 @@
         }
         else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
                 || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
-                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))) {
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '14:30:00')) {
           return ['Passing Period', 'in_between', 6]
         }
         if (localeTimeString > '14:26:00' && localeTimeString < '15:19:00') {
@@ -420,21 +478,22 @@
 
     aday = new Date();
     //update count every second
+    console.log(new Date().getTime())
     var x = setInterval(function () {
     ahora = new Date();
     right_now = new Date(ahora)
     today = new Date(ahora)
     today.setHours(8, 30, 0)
     if (!(ahora.getHours() > 8 && ahora.getHours() < 16)) {
-      if (!(ahora.getHours() == 8 && ahora.getMinutes() > 30)) {
-        notSchoolHours = false;
+      if (!(ahora.getHours() == 8 && ahora.getMinutes() >= 30) && (!(ahora.getHours() == 15 && ahora.getMinutes() <= 19))) {
+        notSchoolHours = true;
       }
-      if (!(ahora.getHours() == 15 && ahora.getMinutes() < 19)) {
+      else {
         notSchoolHours = false;
       }
     }
     else {
-      notSchoolHours = true;
+      notSchoolHours = false;
       if (!(ahora.getHours() == 15 && ahora.getMinutes() < 19)) {
         notSchoolHours = false;
       }
@@ -529,13 +588,14 @@
       document.getElementById("schedule").innerHTML = periodCheck[0];
       }
       else {
-        if (isWeekend) {
+        if (isWeekend || (notSchoolHours && (ahora.toTimeString() < "8:30:00"))) {
           tomorrow = new Date();
           tomorrow = (nextWeekDay(ahora))[0];
         }
         else {
           tomorrow = new Date();
         }
+
         tomorrow.setHours(8, 30, 0);
         timeToNext = tomorrow.getTime() - ahora.getTime()
 
