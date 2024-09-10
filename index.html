@@ -310,10 +310,9 @@
     
     function checkPeriod(time) {
       var localeTimeString = time.toTimeString();
-      to_be_returned = ['CLOSED_TEST']
       if (!(isThursDay)) {
         if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
-          to_be_returned = ['First Period', 'first', 'second'];
+          return ['First Period', 'first', 'second'];
         }
         else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
                 || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
@@ -377,6 +376,9 @@
         }
         if (localeTimeString > '14:26:00' && localeTimeString < '15:19:00') {
           return ['Sixth Period', 'sixth', 'sixth'];
+        }
+        else {
+          return ['CLOSED']
         }
     }
       else if (isThursDay) {
@@ -460,11 +462,13 @@
         if (localeTimeString > '14:27:00' && localeTimeString < '15:15:00') {
           return ['Sixth Period', 'sixth', 'sixth'];
         }
+        else {
+          return ['CLOSED']
+        }
     }
       else {
         return ['CLOSED']
       }
-      
     }
     function timeDif(start, end) {
       starts = new Date()
@@ -480,17 +484,20 @@
     //update count every second
     console.log(new Date().getTime())
     var x = setInterval(function () {
-    ahora = new Date();
+    ahora.setTime(ahora.getTime() + 1000);
     right_now = new Date(ahora)
     today = new Date(ahora)
     today.setHours(8, 30, 0)
-    if (!(ahora.getHours() > 8 && ahora.getHours() < 16)) {
-      if (!(ahora.getHours() == 8 && ahora.getMinutes() >= 30) && (!(ahora.getHours() == 15 && ahora.getMinutes() <= 19))) {
+    if ((ahora.getHours() >= 8 && ahora.getHours() < 16)) {
+      if ((ahora.getHours() == 8 && ahora.getMinutes() < 30) || ((ahora.getHours() == 15 && ahora.getMinutes() > 19))) {
         notSchoolHours = true;
       }
       else {
         notSchoolHours = false;
       }
+    }
+    else if ((ahora.getHours() < 8 || ahora.getHours() > 15)) {
+      notSchoolHours = true;
     }
     else {
       notSchoolHours = false;
@@ -542,7 +549,8 @@
 
 
       periodCheck = checkPeriod(ahora);
-      if (!(isThursDay)) {
+      if (periodCheck[0] !== 'CLOSED') {
+        if (!(isThursDay)) {
         if (periodCheck[1] === "in_between") {
           timeToNext = timeDif(ahora, periods[periodCheck[1]][periodCheck[2]]);
         }
@@ -558,6 +566,8 @@
           timeToNext = timeDif(ahora, periods[periodCheck[1]][2])
         }
       }
+      }
+      
       h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
       s = Math.floor((timeToNext % (1000 * 60)) / 1000);
@@ -588,7 +598,7 @@
       document.getElementById("schedule").innerHTML = periodCheck[0];
       }
       else {
-        if (isWeekend || (notSchoolHours && (ahora.toTimeString() < "8:30:00"))) {
+        if (isWeekend || ((ahora.toTimeString() > "15:19:00"))) {
           tomorrow = new Date();
           tomorrow = (nextWeekDay(ahora))[0];
         }
