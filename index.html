@@ -123,6 +123,28 @@
   <img src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/cat.jpg?raw=true" width="213px" height="142px">
   <script>
     //checkboxes
+    localStorageDate = new Date();
+    if (localStorage.getItem("current_date_periods") === null) {
+      localStorage.setItem("current_date_periods", localStorageDate);
+      let tomorrow_date = new Date(localStorageDate.getDate() + 1);
+      tomorrow_date.setHours(8, 30, 0);
+      localStorage.setItem("tomorrow_due_time", tomorrow_date);
+    }
+    else {
+      if (localStorageDate.getTime() > localStorage.getItem("tomorrow_due_time").getTime()) {
+        for (let i = 1; i <= boxes; i++) {
+          if (localStorage.length > 0) {
+            var checked = false;
+            localStorage.setItem("checkbox" + String(i), checkbox.checked);
+          }
+        }
+        localStorage.setItem("current_date_periods", localStorageDate);
+        let tomorrow_date = new Date(localStorageDate.getDate() + 1);
+        tomorrow_date.setHours(8, 30, 0);
+        localStorage.setItem("tomorrow_due_time", tomorrow_date);
+      }
+    }
+    
     console.log(new Date().getTime())
     let boxes = document.getElementsByClassName('box').length;
 
