@@ -125,23 +125,23 @@
     //checkboxes
     localStorageDate = new Date();
     if (localStorage.getItem("current_date_periods") === null) {
-      localStorage.setItem("current_date_periods", localStorageDate);
+      localStorage.setItem("current_date_periods", localStorageDate.getTime());
       let tomorrow_date = new Date(localStorageDate.getDate() + 1);
       tomorrow_date.setHours(8, 30, 0);
-      localStorage.setItem("tomorrow_due_time", tomorrow_date);
+      localStorage.setItem("tomorrow_due_time", tomorrow_date.getTime());
     }
     else {
-      if (localStorageDate.getTime() > localStorage.getItem("tomorrow_due_time").getTime()) {
+      if (localStorageDate.getTime() > localStorage.getItem("tomorrow_due_time")) {
         for (let i = 1; i <= boxes; i++) {
           if (localStorage.length > 0) {
             var checked = false;
             localStorage.setItem("checkbox" + String(i), checkbox.checked);
           }
         }
-        localStorage.setItem("current_date_periods", localStorageDate);
+        localStorage.setItem("current_date_periods", localStorageDate.getTime());
         let tomorrow_date = new Date(localStorageDate.getDate() + 1);
         tomorrow_date.setHours(8, 30, 0);
-        localStorage.setItem("tomorrow_due_time", tomorrow_date);
+        localStorage.setItem("tomorrow_due_time", tomorrow_date.getTime());
       }
     }
     
