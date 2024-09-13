@@ -507,7 +507,7 @@
     //update count every second
     console.log(new Date().getTime())
     var x = setInterval(function () {
-    ahora.setTime(ahora.getTime() + 1000);
+    ahora = new Date();
     right_now = new Date(ahora)
     today = new Date(ahora)
     today.setHours(8, 30, 0)
