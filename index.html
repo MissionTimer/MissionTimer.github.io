@@ -114,6 +114,7 @@
   <div><input type="checkbox" id="4" class="box">     Period 4 HW</input></div>
   <div><input type="checkbox" id="5" class="box">     Period 5 HW</input></div>
   <div><input type="checkbox" id="6" class="box">     Period 6 HW</input></div>
+  <div><input type="checkbox" id="7" class="box">     Dynamic Title</input></div>
   </div>
   <audio autoplay loop>
     <source src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/undertale.mp3?raw=true"
@@ -637,11 +638,19 @@
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
         s = Math.floor((timeToNext % (1000 * 60)) / 1000);
+        
         if (d !== 0) {
           document.getElementById("next_time").innerHTML = d + "d " + h + "h " + m + "m " + s + "s " + "To the start of school "
         }
         else {
           document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To the start of school "
+        }
+        let checked = JSON.parse(localStorage.getItem("checkbox" + "7"))
+        if (checked === true)  {
+          document.title = d + "d " + h + "h " + m + "m " + s + "s " + "to next" ; 
+        }
+        else {
+          document.title = "Mission (MSJHS) Timer";
         }
         
         periodCheck = ['CLOSED'];
@@ -653,7 +662,6 @@
       seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
       document.getElementById("demo").innerHTML = days + "d " + hours + "h "
         + minutes + "m " + seconds + "s ";
-      document.title = "Mission (MSJHS) Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s"; 
 
 
       
