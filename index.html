@@ -3,7 +3,7 @@
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>
+  <title id="title">
     Mission (MSJHS) Timer
   </title>
 
@@ -651,6 +651,7 @@
       hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
       minutes = Math.floor((total_ms % (1000 * 60 * 60)) / (1000 * 60));
       seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
+      document.getElemetById("title").innerHTML = "Mission (MSJHS) Timer " + days + "d " + hours + "h " + minutes + "m " + seconds + "s"; 
       document.getElementById("demo").innerHTML = days + "d " + hours + "h "
         + minutes + "m " + seconds + "s ";
 
