@@ -647,7 +647,15 @@
         }
         let checked = JSON.parse(localStorage.getItem("checkbox7"))
         if (checked == true)  {
-          document.title = d + "d " + h + "h " + m + "m " + s + "s " + "to next" ; 
+          if (notSchoolHours) {
+            document.title = d + "d " + h + "h " + m + "m " + s + "s " + "to start of school " ; 
+            if (d === 0) {
+              document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "to start of school"
+            }
+          }
+          else {
+            document.title = m + "m " + s + "s " + "to the next period " ;
+          }
         }
         else {
           document.title = "Mission (MSJHS) Timer";
