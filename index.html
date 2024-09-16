@@ -620,7 +620,11 @@
       percent_time = Math.round((time_past / total_period_time) * 10000)/100
       document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period " + "               " + percent_time + "% of time past";
       document.getElementById("schedule").innerHTML = periodCheck[0];
+      let checked = JSON.parse(localStorage.getItem("checkbox7"))
+      if (checked) {
+        document.title = m + "m " + s + "s " + "To Next Period";
       }
+    }
       else {
         if (isWeekend || ((ahora.toTimeString() > "15:19:00"))) {
           tomorrow = new Date();
@@ -646,7 +650,7 @@
           document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To the start of school "
         }
         let checked = JSON.parse(localStorage.getItem("checkbox7"))
-        if (checked == true)  {
+        if (checked === true)  {
           if (notSchoolHours) {
             document.title = d + "d " + h + "h " + m + "m " + s + "s " + "to start of school " ; 
             if (d === 0) {
