@@ -338,7 +338,78 @@
     
     function checkPeriod(time) {
       var localeTimeString = time.toTimeString();
-      if (!(isThursDay)) {
+      if (reg_hoco.includes(_today)) {
+       if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
+          return ['First Period', 'first', 'second'];
+        }
+        else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
+                || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '09:30:00')) {
+          return ['Passing Period', 'in_between', 0]
+        }
+        if (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay))) {
+          return ['Second Period', 'second', 'third'];
+        }
+        else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
+                || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '10:35:00')) {
+          return ['Passing Period', 'in_between', 1]
+        }
+        if (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') {
+          return ['Read', 'read', 'third'];
+        }
+        else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
+                || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '10:55:00')) {
+          return ['Passing Period', 'in_between', 2]
+        }
+        if (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') {
+          return ['Third Period', 'third', 'fourth'];
+        }
+        else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
+                || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '11:55:00')) {
+          return ['Passing Period', 'in_between', 3]
+        }
+        if (localeTimeString > '11:53:00' && localeTimeString < '12:46:00') {
+          return ['Fourth Period', 'fourth', 'lunch'];
+        }
+        else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
+                || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '12:50:00')) {
+          return ['Passing Period', 'in_between', 4]
+        }
+        if (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') {
+          return ['Lunch', 'lunch', 'fifth'];
+        }
+        else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
+                || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '13:30:00')) {
+          return ['Passing Period', 'in_between', 5]
+        }
+        if (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') {
+          return ['Fifth Period', 'fifth', 'sixth'];
+        }
+        else if (!((localeTimeString > '08:30:00' && localeTimeString < '09:23:00') || (localeTimeString > '09:29:00' && localeTimeString < '10:22:00' && (!(isThursDay)))
+                || (localeTimeString > '10:33:00' && localeTimeString < '10:54:00') || (localeTimeString > '10:54:00' && localeTimeString < '11:47:00') || (localeTimeString > '11:53:00' && localeTimeString < '12:46:00')
+                || (localeTimeString > '12:46:00' && localeTimeString < '13:21:00') || (localeTimeString > '13:27:00' && localeTimeString < '14:20:00') || (localeTimeString > '14:26:00' && localeTimeString < '15:19:00'))
+                && (localeTimeString < '14:30:00')) {
+          return ['Passing Period', 'in_between', 6]
+        }
+        if (localeTimeString > '14:26:00' && localeTimeString < '15:19:00') {
+          return ['Sixth Period', 'sixth', 'sixth'];
+        }
+        else {
+          return ['CLOSED']
+        }
+      }
+      else if (!(isThursDay)) {
         if (localeTimeString > '08:30:00' && localeTimeString < '09:23:00') {
           return ['First Period', 'first', 'second'];
         }
