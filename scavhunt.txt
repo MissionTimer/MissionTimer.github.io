@@ -1,0 +1,32 @@
+Welcome home, [name]
+You may participate in this puzzle right now if you like, but you may also participate next morning.
+This will be a timed activity.
+The timer will start if you choose to do the puzzle.
+Please say "Initiate Puzzle" out loud if you would like the puzzle to be initiated.
+If you would not like the puzzle to be initiated, please dictate "Shut Down"
+
+The timer will start after the following rules are read. It will not pause.:
+1) Do not mess with or touch the computer. You are allowed to use a personal device.
+2) For your privacy, you will not be recorded at all times. Please hit the num key 5 on the keyboard to start. Your data will be processed by Microsoft Azure.
+3) All answers will be dictated to the program, but some hints may be found in the room.
+Good Luck!
+
+Question 1:
+What does JARVIS stand for?
+
+Puzzle 2: 
+Go dig near the tomato plants.
+
+Puzzle 3: 
+Head to the T.V. room
+
+Puzzle 4: 
+Where?
+
+Puzzle 5:
+Who?
+
+
+LAST PUZZLE: Please call the number: **DO NOT HANG UP**
+
+Congratulations! You have won!
