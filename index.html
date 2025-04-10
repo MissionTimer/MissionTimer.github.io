@@ -866,6 +866,7 @@
     const muteButton = document.getElementById('mute-button') 
 
     const mute = () => {
+      document.body.classList.add('mutebutton')
       localStorage.setItem('mutebutton', 'active'); 
       document.querySelectorAll("video, audio").forEach((elem) => muteMe(elem));
     }
