@@ -36,6 +36,34 @@
       right: 20px; 
     }
 
+    #mute-button {
+      height: 50px; 
+      width: 50px; 
+      padding: 0px; 
+      border-radius: 50%; 
+      background-color: var(--base-color); 
+      display: flex; 
+      justify-content: center; 
+      align-items: center ; 
+      position: fixed; 
+      bottom: 20px; 
+      right: 20px; 
+      fill: var(--text-color); 
+    }
+
+    #mute-button svg:last-child {
+      display: none; 
+    }
+
+    .darkmode #mute-button svg:first-child {
+      display: none
+    }
+
+    .darkmode #mute-button svg:last-child {
+      display: block
+    }
+    
+
     #theme-switch svg {
       fill: var(--text-color)
     }
@@ -151,7 +179,12 @@
       <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
     </button>
   </header>
-
+  <footer>
+    <button id="mute-button"> 
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M792-56 671-177q-25 16-53 27.5T560-131v-82q14-5 27.5-10t25.5-12L480-368v208L280-360H120v-240h128L56-792l56-56 736 736-56 56Zm-8-232-58-58q17-31 25.5-65t8.5-70q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 53-14.5 102T784-288ZM650-422l-90-90v-130q47 22 73.5 66t26.5 96q0 15-2.5 29.5T650-422ZM480-592 376-696l104-104v208Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#e3e3e3"><path d="M560-131v-82q90-26 145-100t55-168q0-94-55-168T560-749v-82q124 28 202 125.5T840-481q0 127-78 224.5T560-131ZM120-360v-240h160l200-200v640L280-360H120Zm440 40v-322q47 22 73.5 66t26.5 96q0 51-26.5 94.5T560-320Z"/></svg>
+    </button>
+  </footer>
   <!-- Display the countdown timer in an element -->
   <h1 id="demo">LOADING...</h1>
   <h1>Some Cool Facts</h1>
@@ -842,6 +875,72 @@
         
 
     }, 1000);
+  </script>
+  <script>
+    // Mute a singular HTML5 element
+    function muteMe(elem) {
+        elem.muted = true;
+        elem.pause();
+    }
+
+    function unmuteMe(elem) {
+      elem.muted = false; 
+      eleme.unpause(); 
+    }
+    
+    // Try to mute all video and audio elements on the page
+    
+    let mutebutton = localStorage.getItem('mutebutton')
+    const muteButton = document.getElementById('mute-button') 
+
+    const mute = () => {
+      localStorage.setItem('mutebutton', 'active'); 
+      document.querySelectorAll("video, audio").forEach((elem) => muteMe(elem));
+    }
+
+    const unmute = () => {
+      document.querySelectorAll("video, audio").forEach((elem) => unmuteMe(elem));
+      localStorage.setItem('mutebutton', null)
+      play();
+    }
+
+    if (darkmode === "active") mute; 
+
+    muteButton.addEventListener("click", () => {
+      mutebutton = localStorage.getItem('mutebutton')
+      mutebutton !== "active" ? mute() : disableDarkmode()
+      
+    })
+
+    var context;
+    window.onload = function() {
+     context = new AudioContext();
+      context.onstatechange = function() {
+        //if you have permissions, the audioContext will transition to 'running' immediately
+        if(context.state == 'running') {
+          play();
+        }
+      }
+    };
+
+    function play() {
+        //ensure the promise is handled here
+        var promise = document.getElementById('sound').play();
+        if (promise !== undefined) {
+          promise.then(_ => {
+            console.log("playing");
+          }).catch(error => {
+            // Autoplay was prevented.
+          });
+        }
+    }
+
+    //play after the user interacts with the page
+    document.querySelector('button').addEventListener('click', function() {
+      context.resume().then(function() {
+        play();
+      });
+    });
   </script>
 
 </body>
