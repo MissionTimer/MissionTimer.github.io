@@ -1,4 +1,4 @@
- <!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <html>
 
 <head>
@@ -123,53 +123,6 @@
   </audio>
   <img src="https://github.com/HopkinsTimer/HopkinsTimer.github.io/blob/main/cat.jpg?raw=true" width="213px" height="142px">
   <script>
-    //checkboxes
-    /*
-    localStorageDate = new Date();
-    if (localStorage.getItem("current_date_periods") === null) {
-      localStorage.setItem("current_date_periods", localStorageDate.getTime());
-      let tomorrow_date = new Date(localStorageDate.getDate() + 1);
-      tomorrow_date.setHours(8, 30, 0);
-      localStorage.setItem("tomorrow_due_time", tomorrow_date.getTime());
-    }
-    else {
-      if (localStorageDate.getTime() > localStorage.getItem("tomorrow_due_time")) {
-        for (let i = 1; i <= boxes; i++) {
-          if (localStorage.length > 0) {
-            var checked = false;
-            localStorage.setItem("checkbox" + String(i), checkbox.checked);
-          }
-        }
-        localStorage.setItem("current_date_periods", localStorageDate.getTime());
-        let tomorrow_date = new Date(localStorageDate.getDate() + 1);
-        tomorrow_date.setHours(8, 30, 0);
-        localStorage.setItem("tomorrow_due_time", tomorrow_date.getTime());
-      }
-    }
-    */
-    console.log(new Date().getTime())
-    let boxes = document.getElementsByClassName('box').length;
-
-    function save() {	
-      for(let i = 1; i <= boxes; i++){
-        var checkbox = document.getElementById(String(i));
-        localStorage.setItem("checkbox" + String(i), checkbox.checked);	
-      }
-    }
-
-    //for loading
-    for(let i = 1; i <= boxes; i++){
-      if(localStorage.length > 0){
-        var checked = JSON.parse(localStorage.getItem("checkbox" + String(i)));
-        document.getElementById(String(i)).checked = checked;
-      }
-    }
-    window.addEventListener('change', save);
-
-
-    //checkboxes 
-
-
     
     // Set the date we're counting down to
     ahora = new Date();
@@ -236,7 +189,10 @@
     
     var isWeekend = false;
     var notSchoolHours = false;
-    var total_ms = 4331160000;
+    var total_ms = getBusinessDatesCount(new Date('August 14, 2024 08:15:00'), new Date('May 30, 2025 13:00:00')) * 24540000;
+    total_ms += getThursdayCount(new Date('August 14, 2024 08:15:00'), new Date('May 30, 2025 13:00:00')) * 24300000;
+    total_ms += (getShorterDates(new Date('August 14, 2024 08:15:00'), new Date('May 30, 2025 13:00:00')) * 17400000);
+    total_ms += 17700000; 
     var start_date = new Date('August 14, 2024 08:15:00')
     var today = new Date(ahora);
     var _today = today.toLocaleDateString();
@@ -583,175 +539,175 @@
     //update count every second
     console.log(new Date().getTime())
     var x = setInterval(function () {
-    ahora = new Date();
-    right_now = new Date(ahora)
-    today = new Date(ahora)
-    today.setHours(8, 30, 0)
-    if ((ahora.getHours() >= 8 && ahora.getHours() < 16)) {
-      if ((ahora.getHours() == 8 && ahora.getMinutes() < 30) || ((ahora.getHours() == 15 && ahora.getMinutes() >= 19))) {
+      ahora = new Date();
+      right_now = new Date(ahora)
+      today = new Date(ahora)
+      today.setHours(8, 30, 0)
+      if ((ahora.getHours() >= 8 && ahora.getHours() < 16)) {
+        if ((ahora.getHours() == 8 && ahora.getMinutes() < 30) || ((ahora.getHours() == 15 && ahora.getMinutes() >= 19))) {
+          notSchoolHours = true;
+        }
+        else {
+          notSchoolHours = false;
+        }
+      }
+      else if ((ahora.getHours() < 8 || ahora.getHours() > 15)) {
         notSchoolHours = true;
       }
       else {
         notSchoolHours = false;
+        if (!(ahora.getHours() == 15 && ahora.getMinutes() < 19)) {
+          notSchoolHours = false;
+        }
       }
-    }
-    else if ((ahora.getHours() < 8 || ahora.getHours() > 15)) {
-      notSchoolHours = true;
-    }
-    else {
-      notSchoolHours = false;
-      if (!(ahora.getHours() == 15 && ahora.getMinutes() < 19)) {
-        notSchoolHours = false;
+      if (notSchoolHours === true) {
+      right_now.setHours(15, 19, 0)
       }
-    }
-    if (notSchoolHours === true) {
-    right_now.setHours(15, 19, 0)
-    }
-    if (today.getDay() == 0) {
-      isWeekend = true;
-      today.setDate(today.getDate() - 2);
-    }
-    else if (today.getDay() == 6) {
-      isWeekend = true;
-      today.setDate(today.getDate() - 1);
-    }
-    else {
-      isWeekend = false;
-    }
-    total_ms = (total_mses - (right_now.getTime() - today.getTime()));
-      if (!(isWeekend) && !(notSchoolHours)) {
-        console.log(ahora.toTimeString())
-        
-        /*
-        var daysElapsed2 = getBusinessDatesCount(start_date, today)
-        var thursdayCount2 = getThursdayCount(start_date, today)
-        var shorterDatesCount2 = getShorterDates(start_date, today)
-        if (daysElapsed2 !== daysElapsed) {
-          total_ms -= 24540000 * (daysElapsed2 - daysElapsed);
-          daysElapsed = daysElapsed2;
-        }
-        if (thursdayCount2 !== thursdayCount) {
-          total_ms -= 24300000 * (thursdayCount2 - thursdayCount);
-          thursdayCount = thursdayCount2;
-        }
-        if (shorterDatesCount2 !== shorterDatesCount) {
-          total_ms -= 17400000 * (shorterDatesCount - shorterDatesCount);
-          shorterDatesCount = shorterDatesCount2;
-        }
-        */
-    today.setHours(8, 30, 0);
-    daysElapsed = getBusinessDatesCount(start_date, today)
-    thursdayCount = getThursdayCount(start_date, today)
-    shorterDatesCount = getShorterDates(start_date, today)
-    //do various checks to see if there is school right now
-
-
-
-      periodCheck = checkPeriod(ahora);
-      if (periodCheck[0] !== 'CLOSED') {
-        if (!(isThursDay)) {
-        if (periodCheck[1] === "in_between") {
-          timeToNext = timeDif(ahora, periods[periodCheck[1]][periodCheck[2]]);
-        }
-        else {
-          timeToNext = timeDif(ahora, periods[periodCheck[1]][1]);
-        }
+      if (today.getDay() == 0) {
+        isWeekend = true;
+        today.setDate(today.getDate() - 2);
+      }
+      else if (today.getDay() == 6) {
+        isWeekend = true;
+        today.setDate(today.getDate() - 1);
       }
       else {
-        if (periodCheck[1] === "in_between_thurs") {
-            timeToNext = timeDif(ahora, periods[periodCheck[1]][periodCheck[2]]);
-        }
-        else {
-          timeToNext = timeDif(ahora, periods[periodCheck[1]][2])
-        }
+        isWeekend = false;
       }
-      }
-      
-      h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
-      s = Math.floor((timeToNext % (1000 * 60)) / 1000);
-      if (periodCheck[1] === 'lunch' && !(isThursDay)) {
-        total_period_time = 2100000;
-      }
-      else {
-        if (isThursDay) {
-        total_period_time = 2880000;
-        if (periodCheck[1] === 'lunch') {
-          total_period_time = 2040000;
-        }
-        if (periodCheck[1] === 'advisory') {
-          total_period_time = 2520000;
-        }
-      }
-        else {
-          total_period_time = 3180000
-          if (periodCheck[1] === 'read') {
-            total_period_time = 1260000;
+      total_ms = (total_mses - (right_now.getTime() - today.getTime()));
+        if (!(isWeekend) && !(notSchoolHours)) {
+          console.log(ahora.toTimeString())
+          
+          /*
+          var daysElapsed2 = getBusinessDatesCount(start_date, today)
+          var thursdayCount2 = getThursdayCount(start_date, today)
+          var shorterDatesCount2 = getShorterDates(start_date, today)
+          if (daysElapsed2 !== daysElapsed) {
+            total_ms -= 24540000 * (daysElapsed2 - daysElapsed);
+            daysElapsed = daysElapsed2;
           }
-        }  
-      }
-      
-      time_past = total_period_time - timeToNext
-      percent_time = Math.round((time_past / total_period_time) * 10000)/100
-      document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period " + "               " + percent_time + "% of time past";
-      document.getElementById("schedule").innerHTML = periodCheck[0];
-      let checked = JSON.parse(localStorage.getItem("checkbox7"))
-      if (checked) {
-        document.title = m + "m " + s + "s " + "To Next Period";
-      }
-    }
-      else {
-        if (isWeekend || ((ahora.toTimeString() > "15:19:00"))) {
-          tomorrow = new Date();
-          tomorrow = (nextWeekDay(ahora))[0];
+          if (thursdayCount2 !== thursdayCount) {
+            total_ms -= 24300000 * (thursdayCount2 - thursdayCount);
+            thursdayCount = thursdayCount2;
+          }
+          if (shorterDatesCount2 !== shorterDatesCount) {
+            total_ms -= 17400000 * (shorterDatesCount - shorterDatesCount);
+            shorterDatesCount = shorterDatesCount2;
+          }
+          */
+      today.setHours(8, 30, 0);
+      daysElapsed = getBusinessDatesCount(start_date, today)
+      thursdayCount = getThursdayCount(start_date, today)
+      shorterDatesCount = getShorterDates(start_date, today)
+      //do various checks to see if there is school right now
+
+
+
+        periodCheck = checkPeriod(ahora);
+        if (periodCheck[0] !== 'CLOSED') {
+          if (!(isThursDay)) {
+          if (periodCheck[1] === "in_between") {
+            timeToNext = timeDif(ahora, periods[periodCheck[1]][periodCheck[2]]);
+          }
+          else {
+            timeToNext = timeDif(ahora, periods[periodCheck[1]][1]);
+          }
         }
         else {
-          tomorrow = new Date();
+          if (periodCheck[1] === "in_between_thurs") {
+              timeToNext = timeDif(ahora, periods[periodCheck[1]][periodCheck[2]]);
+          }
+          else {
+            timeToNext = timeDif(ahora, periods[periodCheck[1]][2])
+          }
         }
-
-        tomorrow.setHours(8, 30, 0);
-        timeToNext = tomorrow.getTime() - ahora.getTime()
-
+        }
         
-        d = Math.floor(timeToNext / (1000 * 60 * 60 * 24))
         h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
         m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
         s = Math.floor((timeToNext % (1000 * 60)) / 1000);
-        
-        if (d !== 0) {
-          document.getElementById("next_time").innerHTML = d + "d " + h + "h " + m + "m " + s + "s " + "To the start of school "
+        if (periodCheck[1] === 'lunch' && !(isThursDay)) {
+          total_period_time = 2100000;
         }
         else {
-          document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To the start of school "
+          if (isThursDay) {
+          total_period_time = 2880000;
+          if (periodCheck[1] === 'lunch') {
+            total_period_time = 2040000;
+          }
+          if (periodCheck[1] === 'advisory') {
+            total_period_time = 2520000;
+          }
         }
+          else {
+            total_period_time = 3180000
+            if (periodCheck[1] === 'read') {
+              total_period_time = 1260000;
+            }
+          }  
+        }
+        
+        time_past = total_period_time - timeToNext
+        percent_time = Math.round((time_past / total_period_time) * 10000)/100
+        document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To Next Period " + "               " + percent_time + "% of time past";
+        document.getElementById("schedule").innerHTML = periodCheck[0];
         let checked = JSON.parse(localStorage.getItem("checkbox7"))
-        if (checked === true)  {
-          if (notSchoolHours) {
-            document.title = d + "d " + h + "h " + m + "m " + s + "s " + "to start of school " ; 
-            if (d === 0) {
-              document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "to start of school"
+        if (checked) {
+          document.title = m + "m " + s + "s " + "To Next Period";
+        }
+      }
+        else {
+          if (isWeekend || ((ahora.toTimeString() > "15:19:00"))) {
+            tomorrow = new Date();
+            tomorrow = (nextWeekDay(ahora))[0];
+          }
+          else {
+            tomorrow = new Date();
+          }
+
+          tomorrow.setHours(8, 30, 0);
+          timeToNext = tomorrow.getTime() - ahora.getTime()
+
+          
+          d = Math.floor(timeToNext / (1000 * 60 * 60 * 24))
+          h = Math.floor((timeToNext % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+          m = Math.floor((timeToNext % (1000 * 60 * 60)) / (1000 * 60));
+          s = Math.floor((timeToNext % (1000 * 60)) / 1000);
+          
+          if (d !== 0) {
+            document.getElementById("next_time").innerHTML = d + "d " + h + "h " + m + "m " + s + "s " + "To the start of school "
+          }
+          else {
+            document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "To the start of school "
+          }
+          let checked = JSON.parse(localStorage.getItem("checkbox7"))
+          if (checked === true)  {
+            if (notSchoolHours) {
+              document.title = d + "d " + h + "h " + m + "m " + s + "s " + "to start of school " ; 
+              if (d === 0) {
+                document.getElementById("next_time").innerHTML = h + "h " + m + "m " + s + "s " + "to start of school"
+              }
+            }
+            else {
+              document.title = m + "m " + s + "s " + "to the next period " ;
             }
           }
           else {
-            document.title = m + "m " + s + "s " + "to the next period " ;
+            document.title = "Mission (MSJHS) Timer";
           }
+          
+          periodCheck = ['CLOSED'];
+          document.getElementById("schedule").innerHTML = periodCheck[0];
         }
-        else {
-          document.title = "Mission (MSJHS) Timer";
-        }
+        days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
+        hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        minutes = Math.floor((total_ms % (1000 * 60 * 60)) / (1000 * 60));
+        seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
+        document.getElementById("demo").innerHTML = days + "d " + hours + "h "
+          + minutes + "m " + seconds + "s ";
+
+
         
-        periodCheck = ['CLOSED'];
-        document.getElementById("schedule").innerHTML = periodCheck[0];
-      }
-      days = Math.floor(total_ms / (1000 * 60 * 60 * 24));
-      hours = Math.floor((total_ms % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      minutes = Math.floor((total_ms % (1000 * 60 * 60)) / (1000 * 60));
-      seconds = Math.floor((total_ms % (1000 * 60)) / 1000);
-      document.getElementById("demo").innerHTML = days + "d " + hours + "h "
-        + minutes + "m " + seconds + "s ";
-
-
-      
 
     }, 1000);
   </script>
