@@ -872,16 +872,17 @@
     }
 
     const unmute = () => {
+      document.body.classList.remove('mutebutton')
       document.querySelectorAll("video, audio").forEach((elem) => unmuteMe(elem));
       localStorage.setItem('mutebutton', null)
       play();
     }
 
-    if (darkmode === "active") mute; 
+    if (muteButton === "active") mute; 
 
     muteButton.addEventListener("click", () => {
       mutebutton = localStorage.getItem('mutebutton')
-      mutebutton !== "active" ? mute() : disableDarkmode()
+      mutebutton !== "active" ? mute() : unmute()
       
     })
 
@@ -908,12 +909,6 @@
         }
     }
 
-    //play after the user interacts with the page
-    document.querySelector('button').addEventListener('click', function() {
-      context.resume().then(function() {
-        play();
-      });
-    });
   </script>
 
 </body>
