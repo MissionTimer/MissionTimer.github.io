@@ -51,15 +51,19 @@
       fill: var(--text-color); 
     }
 
+    #mute-button svg {
+      fill: var(--text-color); 
+    }
+
     #mute-button svg:last-child {
       display: none; 
     }
 
-    .darkmode #mute-button svg:first-child {
+    .mutebutton #mute-button svg:first-child {
       display: none
     }
 
-    .darkmode #mute-button svg:last-child {
+    .mutebutton #mute-button svg:last-child {
       display: block
     }
     
@@ -885,7 +889,7 @@
 
     function unmuteMe(elem) {
       elem.muted = false; 
-      eleme.unpause(); 
+      eleme.play(); 
     }
     
     // Try to mute all video and audio elements on the page
