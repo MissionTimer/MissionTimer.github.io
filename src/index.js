@@ -246,11 +246,16 @@ if ((today < start_date || today > last_date) && !(debugging)) { //debugging set
         document.getElementById("schedule").innerHTML = times_to_next[0];
 
         if (title_changes) {
-            document.getElementById("title1").innerHTML = time;
+            document.getElementById("title1").innerHTML = ((arr[0] || "") + ((arr[0] && "d ") || "")) +
+            (((arr[1] && (arr[1] || "")) && ((arr[1] || arr[0]) || "")) + ((((arr[1] && "h ")) || "") || ((arr[0] && "h ") || ""))) + //       ((arr[1] || (arr[1] && (arr[0] || "")) || "") + ((((arr[1] && "h ")) || "") && ((arr[0] && "h ") || "")))
+            (((arr[2] && (arr[2] || "")) && (((arr[2] || arr[1]) || "") || ((arr[2] || arr[1]) || ""))) + (((arr[2] && "m ") || "") || ((arr[1] && "m ") || "") || ((arr[0] && "m ") || ""))) + // (((arr[2] || "") || ())
+            arr[3] + "s " + (arr[4] || "") +
+            ((arr[4] && "ms ") || "");;
         }
         else if (!(title_changes) && (title_changes !== prev_title_change)) {
             document.getElementById("title1").innerHTML = "MISSION (MSJHS) TIMER ";
         }
+        var prev_title_change = title_changes
 
     }, 100)
 
