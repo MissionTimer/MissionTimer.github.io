@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="d4b226dd-a4bf-4ad9-a4b7-8b0ea8bcf824" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/buttonstyle.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/c_files/time.c" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/mjs/test.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/c.mjs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/c.wasm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/calendar.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/wasm/time.wasm" afterDir="false" />
-    </list>
+    <list default="true" id="d4b226dd-a4bf-4ad9-a4b7-8b0ea8bcf824" name="Changes" comment="First commit!" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -88,11 +74,24 @@
       <workItem from="1754095566217" duration="17237000" />
       <workItem from="1754153613898" duration="3958000" />
       <workItem from="1754163703213" duration="21687000" />
-      <workItem from="1754273809568" duration="248000" />
+      <workItem from="1754273809568" duration="554000" />
     </task>
+    <task id="LOCAL-00001" summary="First commit!">
+      <option name="closed" value="true" />
+      <created>1754274226649</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1754274226649</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="First commit!" />
+    <option name="LAST_COMMIT_MESSAGE" value="First commit!" />
   </component>
 </project>
