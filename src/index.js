@@ -46,7 +46,8 @@ const holidays = [ '09/01/2025',
 ];
 
 const debugging = false;
-const day_start = new Date().setHours(8, 30, 0)
+var day_start = new Date()
+day_start.setHours(8, 30, 0) 
 const day_end = new Date().setHours(15, 19, 0)
 
 var _init_date = new Date().getDate()
@@ -210,7 +211,7 @@ function period(time_local) {
     }
     if (today.getTime() < start_date.getTime()) {
         phrase = "SCHOOL'S OUT! " 
-        timeToNext = days_start.getTime() - today.getTime();
+        timeToNext = day_start.getTime() - today.getTime();
     }
     return [phrase, timeToNext]
 
