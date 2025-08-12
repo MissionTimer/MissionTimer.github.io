@@ -209,8 +209,8 @@ function period(time_local) {
          timeToNext = next_period.getTime() - today.getTime();
     }
     if (today.getTime() < start_date.getTime()) {
-        phrase = "SCHOOL'S OUT! "
-        timeToNext = start_date.getTime() - today.getTime();
+        phrase = "SCHOOL'S OUT! " 
+        timeToNext = days_start.getTime() - today.getTime();
     }
     return [phrase, timeToNext]
 
