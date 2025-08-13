@@ -180,7 +180,7 @@ function period(time_local) {
         timeToNext = next_period.getTime() - today.getTime();
     }
 
-    else if ((time_local < "11:42:00" && time_local >= "11:50:00")) {
+    else if ((time_local < "11:42:00" && time_local >= "10:50:00")) {
         phrase = "THIRD PERIOD! ";
         next_period.setHours(11, 42, 0);
         timeToNext = next_period.getTime() - today.getTime();
@@ -198,7 +198,7 @@ function period(time_local) {
         timeToNext = next_period.getTime() - today.getTime();
     }
 
-    else if ((time_local < "14:13:00" && time_local >= "01:21:00")) {
+    else if ((time_local < "14:13:00" && time_local >= "13:21:00")) {
         phrase = "FIFTH PERIOD! ";
         next_period.setHours(14, 13, 0);
         timeToNext = next_period.getTime() - today.getTime();
