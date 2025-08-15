@@ -114,8 +114,10 @@ for (let i = 0; i < holidays.length; i++) {
 }
 
 function findNextSchoolDate(day) {
-    let curDate = new Date(day.getTime());
-    if ((curDate.getHours() >= 15) || (curDate.getHours() === 15 && curDate.getMinutes() >= 11)) {
+    let curDate = new Date(day.getTime()); 
+    let end_of_day = new Date(); 
+    end_of_day.setHours(15, 11, 0); 
+    if (curDate.getTime() >= end_of_day.getTime()) {
         curDate.setDate(curDate.getDate() + 1)
     }
     while (curDate.getTime() <= last_date.getTime()) {
