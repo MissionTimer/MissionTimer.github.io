@@ -242,8 +242,8 @@ if ((today < start_date || today > last_date) && !(debugging)) { //debugging set
         document.getElementById("TIMER").innerHTML = "YOU ARE OUT OF SCHOOL RIGHT NOW!"; // if there is no school
         document.getElementById("next_class").innerHTML =
             ((arr[0] || "") + ((arr[0] && "d ") || "")) +
-            (((arr[1] && (arr[1] || "")) && ((arr[1] || arr[0]) || "")) + ((((arr[1] && "h ")) || "") || ((arr[0] && "h ") || ""))) + //       ((arr[1] || (arr[1] && (arr[0] || "")) || "") + ((((arr[1] && "h ")) || "") && ((arr[0] && "h ") || "")))
-            (((arr[2] && (arr[2] || "")) && (((arr[2] || arr[1]) || "") || ((arr[2] || arr[1]) || ""))) + (((arr[2] && "m ") || "") || ((arr[1] && "m ") || "") || ((arr[0] && "m ") || ""))) + // (((arr[2] || "") || ())
+            (((arr[1] || (arr[1] || "")) && ((arr[1] || arr[0]) || "")) + ((((arr[1] && "h ")) || "") || ((arr[0] && "h ") || ""))) + //       ((arr[1] || (arr[1] && (arr[0] || "")) || "") + ((((arr[1] && "h ")) || "") && ((arr[0] && "h ") || "")))
+            (((arr[2] || (arr[2] || "")) && (((arr[2] || arr[1]) || "") || ((arr[2] || arr[1]) || ""))) + (((arr[2] && "m ") || "") || ((arr[1] && "m ") || "") || ((arr[0] && "m ") || ""))) + // (((arr[2] || "") || ())
             arr[3] + "s " + (arr[4] || "") +
             ((arr[4] && "ms ") || "");
         document.getElementById("schedule").innerHTML = times_to_next[0];
