@@ -1,20 +1,41 @@
 <!DOCTYPE HTML>
 
-<html lang="en-us"> 
-    
-<head> 
-    <meta name="description" content="This is a timer for counting down the number of minutes that MSJHS has in a school year. MSJHS or Mission San Jose High School is a school in California, 
-        and this is the number of minutes that count down for it to ensure students know when their school ends for the year and how much time they have left for school on the timer. It functions as a sort of  
-     alarm. This website is known as 'Mission Timer,' and it was created by a semi-talented dev at Mission San Jose, it has a relation to school and mission. "/> 
-    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js'></script> 
+<html lang="en-us">
+
+<head>
+    <meta name="description" content="This is a timer for counting down the number of minutes that MSJHS has in a school year. MSJHS or Mission San Jose High School is a school in California,
+        and this is the number of minutes that count down for it to ensure students know when their school ends for the year and how much time they have left for school on the timer. It functions as a sort of
+     alarm. This website is known as 'Mission Timer,' and it was created by a semi-talented dev at Mission San Jose, it has a relation to school and mission. "/>
+    <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js'></script>
     <meta name="google-site-verification" content="C8dgfTjUZltj46mjRQgCRaBuQG6aMMDK5LhHhYIiD2Y" />
     <meta name="viewport" content="width=device-width", initial-scale="1" charset="utf-8">
     <title id="title1">Mission (MSJHS) Timer</title>
     <link rel="icon" type="image/x-icon" href="https://raw.githubusercontent.com/MissionTimer/MissionTimer.github.io.old.version/main/msjhstimerfavicon-final.png">
     <link rel="stylesheet" href="style.css">
+    <div class="parent_container">
+
+        <div class="schedule_container">
+            <h3>1st    08:30 - 9:22</h3>
+            <h3>2nd    09:28 - 10:22</h3>
+            <h3>BREAK  10:20 - 10:25</h3>
+            <h3>READ   10:31 - 10:50</h3>
+            <h3>3rd    10:50 - 11:42</h3>
+        </div>
+
+        <div class="schedule_container">
+            <h3>4th    11:48 - 12:40</h3>
+            <h3>LUNCH  12:40 - 01:15</h3>
+            <h3>5th    01:21 - 02:23</h3>
+            <h3>6th    02:19 - 03:11</h3>
+
+
+        </div>
+
+    </div>
     <div class="top">SCHOOL TIME REMAINING!</div>
     <link rel="stylesheet" href="buttonstyle.css">
 </head>
+
 <body>
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.18/index.global.min.js'></script>
 <div class="container">
@@ -30,10 +51,10 @@
 <!-- Rounded switch -->
 
 <div class="switch_box">
-<label class="switch">
-    <input type="checkbox" id="title_change" aria-description="title_change" value="title_change" onclick="change_title(); ">
-    <span class="slider round"></span>
-</label>
+    <label class="switch">
+        <input type="checkbox" id="title_change" aria-description="title_change" value="title_change" onclick="change_title(); ">
+        <span class="slider round"></span>
+    </label>
     <div class="p1">Header Display</div>
 </div>
 
