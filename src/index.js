@@ -26,7 +26,7 @@ const holidays = [ '09/01/2025',
     '1/3/2026',
     '1/5/2026'
 
-    ['11/24/2025', '11/28/2025'],
+        ['11/24/2025', '11/28/2025'],
     ['12/22/2025', '01/05/2026'],
 
     '1/19/2025',
@@ -45,16 +45,27 @@ const holidays = [ '09/01/2025',
     '05/25/2025'
 ];
 
+
+const total_day_time = 24060000 // ms
+const total_days = 195 // days
+const total_time_year = total_day_time * total_days // ms
+
 const debugging = false;
 var day_start = new Date()
-day_start.setHours(8, 30, 0) 
-const day_end = new Date().setHours(15, 19, 0)
+day_start.setHours(8, 30, 0)
+const day_end = new Date().setHours(15, 11, 0)
 
 var _init_date = new Date().getDate()
 
 function getBusinessDatesCount(startDate, endDate) {
     let count = 0;
     var curDate = new Date(startDate.getTime());
+    if (curDate.getDate() === endDate.getDate()) {
+        return 0;
+    }
+    else {
+        curDate.setHours(8, 30, 0, 0);
+    }
     while (curDate.getTime() <= endDate.getTime()) {
         let dayOfWeek = curDate.getDay();
         var _day = curDate.toLocaleDateString();
@@ -67,7 +78,7 @@ function getBusinessDatesCount(startDate, endDate) {
 function isWeekend(date) {
     if (date.getDay() !== 0 && date.getDay() !== 6) { return false; }
     return true;
-} 
+}
 
 function isSchoolHours(date) {
     if ((date.getHours() >= 15 && date.getMinutes() >= 11) || (date.getHours() <= 8 && date.getHours() < 30)) { return true; }
@@ -97,7 +108,10 @@ function schoolTomorrow(date) {
 }
 
 function timeTillEndOfDay(date) {
-    let end_of_day = new Date(today.getTime());
+    if (isWeekend(date)) {
+        return 0;
+    }
+    let end_of_day = new Date();
     end_of_day.setHours(15, 19, 0, 0);
     return end_of_day.getTime() - date.getTime();
 
@@ -114,9 +128,9 @@ for (let i = 0; i < holidays.length; i++) {
 }
 
 function findNextSchoolDate(day) {
-    let curDate = new Date(day.getTime()); 
-    let end_of_day = new Date(); 
-    end_of_day.setHours(15, 11, 0); 
+    let curDate = new Date(day.getTime());
+    let end_of_day = new Date();
+    end_of_day.setHours(15, 11, 0);
     if (curDate.getTime() >= end_of_day.getTime()) {
         curDate.setDate(curDate.getDate() + 1)
     }
@@ -189,9 +203,9 @@ function period(time_local) {
     }
 
     else if ((time_local < "12:40:00" && time_local >= "11:48:00")) {
-         phrase = "FOURTH PERIOD! ";
-         next_period.setHours(12, 40, 0);
-         timeToNext = next_period.getTime() - today.getTime();
+        phrase = "FOURTH PERIOD! ";
+        next_period.setHours(12, 40, 0);
+        timeToNext = next_period.getTime() - today.getTime();
     }
 
     else if ((time_local < "13:15:00" && time_local >= "12:40:00")) {
@@ -207,12 +221,12 @@ function period(time_local) {
     }
 
     else if ((time_local < "13:11:00" && time_local >= "14:19:00")) {
-         phrase = "SIXTH PERIOD! ";
-         next_period.setHours(15, 11, 0);
-         timeToNext = next_period.getTime() - today.getTime();
+        phrase = "SIXTH PERIOD! ";
+        next_period.setHours(15, 11, 0);
+        timeToNext = next_period.getTime() - today.getTime();
     }
     if (today.getTime() < start_date.getTime()) {
-        phrase = "SCHOOL'S OUT! " 
+        phrase = "SCHOOL'S OUT! "
         timeToNext = day_start.getTime() - today.getTime();
     }
     return [phrase, timeToNext]
@@ -250,10 +264,10 @@ if ((today < start_date || today > last_date) && !(debugging)) { //debugging set
 
         if (title_changes) {
             document.getElementById("title1").innerHTML = ((arr[0] || "") + ((arr[0] && "d ") || "")) +
-            (((arr[1] && (arr[1] || "")) && ((arr[1] || arr[0]) || "")) + ((((arr[1] && "h ")) || "") || ((arr[0] && "h ") || ""))) + //       ((arr[1] || (arr[1] && (arr[0] || "")) || "") + ((((arr[1] && "h ")) || "") && ((arr[0] && "h ") || "")))
-            (((arr[2] && (arr[2] || "")) && (((arr[2] || arr[1]) || "") || ((arr[2] || arr[1]) || ""))) + (((arr[2] && "m ") || "") || ((arr[1] && "m ") || "") || ((arr[0] && "m ") || ""))) + // (((arr[2] || "") || ())
-            arr[3] + "s " + (arr[4] || "") +
-            ((arr[4] && "ms ") || "");;
+                (((arr[1] && (arr[1] || "")) && ((arr[1] || arr[0]) || "")) + ((((arr[1] && "h ")) || "") || ((arr[0] && "h ") || ""))) + //       ((arr[1] || (arr[1] && (arr[0] || "")) || "") + ((((arr[1] && "h ")) || "") && ((arr[0] && "h ") || "")))
+                (((arr[2] && (arr[2] || "")) && (((arr[2] || arr[1]) || "") || ((arr[2] || arr[1]) || ""))) + (((arr[2] && "m ") || "") || ((arr[1] && "m ") || "") || ((arr[0] && "m ") || ""))) + // (((arr[2] || "") || ())
+                arr[3] + "s " + (arr[4] || "") +
+                ((arr[4] && "ms ") || "");;
         }
         else if (!(title_changes) && (title_changes !== prev_title_change)) {
             document.getElementById("title1").innerHTML = "MISSION (MSJHS) TIMER ";
@@ -283,10 +297,11 @@ else { // else there is school
             _init_date = today.getDate();
         }
         time_left = days_left * day_time + timeTillEndOfDay(today);
+        time_left_total_percent = Math.floor(((1 - (time_left/total_time_year)) * 100000)) / 1000
         // let convertedTime = convertTime(time_left);
         time_converter(time_left, arr)
         var time = arr[0] + 'd ' + arr[1] + "h " + arr[2] + "m " + arr[3] + "s " + arr[4] + 'ms ';
-        document.getElementById("TIMER").innerHTML = time;
+        document.getElementById("TIMER").innerHTML = time + ', ' + time_left_total_percent + '% ';
         count += 1
         if (title_changes) {
             document.getElementById("title1").innerHTML = time;
@@ -297,7 +312,6 @@ else { // else there is school
 
         times_to_next = period(today.toTimeString());
         time_converter(times_to_next[1], arr)
-
         document.getElementById("next_class").innerHTML =
             ((arr[0] || "") + ((arr[0] && "d ") || "")) +
             (((arr[1] && (arr[1] || "")) && ((arr[1] || arr[0]) || ""))  + ((((arr[1] && "h ")) || "") || ((arr[0] && "h ") || ""))) + //       ((arr[1] || (arr[1] && (arr[0] || "")) || "") + ((((arr[1] && "h ")) || "") && ((arr[0] && "h ") || "")))
@@ -318,4 +332,3 @@ else { // else there is school
 
 
 }
-
