@@ -60,7 +60,7 @@ var _init_date = new Date().getDate()
 function getBusinessDatesCount(startDate, endDate) {
     let count = 0;
     var curDate = new Date(startDate.getTime());
-    if (curDate.getDate() === endDate.getDate()) {
+    if (curDate.toDateString() === endDate.toDateString()) {
         return 0;
     }
     else {
@@ -280,14 +280,14 @@ if ((today < start_date || today > last_date) && !(debugging)) { //debugging set
 
 else { // else there is school
     const day_time = day_end - day_start; // roughly ~ 349 minutes in the past
-    var today = new Date();
-    var Weekend = isWeekend(today);
-    var notSchoolHours = isSchoolHours(today);
-    var days_left = getBusinessDatesCount(today, last_date);
-    var time_left = days_left - days_left * day_time + timeTillEndOfDay(today);
+    var time_left = days_left * day_time + timeTillEndOfDay(today);
     var count = 0;
     var total_time = 0;
-    var x = setInterval(function() {
+    var x = setInterval(function() { 
+        var today = new Date();
+        var Weekend = isWeekend(today);
+        var notSchoolHours = isSchoolHours(today);
+        var days_left = getBusinessDatesCount(today, last_date);
         z = performance.now()
         if (debugging) {today.setTime(today.getTime() + 333);}
         else {today = new Date(); }
