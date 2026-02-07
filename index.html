@@ -44,8 +44,16 @@
     <h3 id="next_class">LOADING</h3>
     <script src="src/index.js"></script>
 </div>
+<nav>
+    <button id="theme-toggle" aria-label="Toggle Dark Mode">
+        <img src="svgs/dark_mode.svg" class="icon moon" alt="Dark Mode">
+        <img src="svgs/light_mode.svg" class="icon sun" alt="Light Mode">
+    </button>
+</nav>
 <div id="calendar"></div>
 <script src="src/calendar.js"></script>
+
+<script src="src/darkmode.js"></script>
 </body>
 
 <!-- Rounded switch -->
@@ -55,7 +63,7 @@
         <input type="checkbox" id="title_change" aria-description="title_change" value="title_change" onclick="change_title(); ">
         <span class="slider round"></span>
     </label>
-    <div class="p1">Header Display</div>
+    <div class="p1">Change URL Title</div>
 </div>
 
 </html>
