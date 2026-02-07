@@ -10,10 +10,64 @@
 }
 
 :root {
-    --base-color: white;
+    --bg-color: white;
     --text-color: rgb(16, 20, 24);
+    --button-bg: grey;
+    --button-text: black;
 }
 
+[data-theme="dark"] {
+    --bg-color: #121212;
+    --text-color: #f0f0f0;
+}
+/* Remove standard button styling */
+#theme-toggle {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Base state: Hide Sun, Show Moon */
+.sun { display: none; }
+.moon { display: block; }
+
+/* Dark Mode state: Hide Moon, Show Sun */
+[data-theme="dark"] .sun {
+    display: block;
+    filter: invert(0%) sepia(8%) saturate(7500%) hue-rotate(355deg) brightness(103%) contrast(110%);
+}
+
+[data-theme="dark"] .moon {
+    display: none;
+    filter: invert(0%) sepia(8%) saturate(7500%) hue-rotate(355deg) brightness(103%) contrast(110%);
+}
+
+/* Optional: Add a hover effect */
+#theme-toggle:hover {
+    opacity: 0.9;
+    transform: scale(1.2);
+    transition: transform 0.3s ease;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    /* Smooth transition for color changes */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-family: Segoe UI, Tahoma, Geneva, Verdana, sans-serif;
+    padding: 0.5rem;
+}
+
+button {
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
 
 .top {
     color: var(--text-color);
