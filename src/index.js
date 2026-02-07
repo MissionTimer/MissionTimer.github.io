@@ -220,7 +220,7 @@ function period(time_local) {
         timeToNext = next_period.getTime() - today.getTime();
     }
 
-    else if ((time_local < "13:11:00" && time_local >= "14:19:00")) {
+    else if ((time_local < "15:11:00" && time_local >= "14:19:00")) {
         phrase = "SIXTH PERIOD! ";
         next_period.setHours(15, 11, 0);
         timeToNext = next_period.getTime() - today.getTime();
@@ -280,11 +280,14 @@ if ((today < start_date || today > last_date) && !(debugging)) { //debugging set
 
 else { // else there is school
     const day_time = day_end - day_start; // roughly ~ 349 minutes in the past
+    var today = new Date();
+    var Weekend = isWeekend(today);
+    var notSchoolHours = isSchoolHours(today);
+    var days_left = getBusinessDatesCount(today, last_date);
     var time_left = days_left * day_time + timeTillEndOfDay(today);
     var count = 0;
     var total_time = 0;
-    var x = setInterval(function() { 
-        var today = new Date();
+    var x = setInterval(function() {
         var Weekend = isWeekend(today);
         var notSchoolHours = isSchoolHours(today);
         var days_left = getBusinessDatesCount(today, last_date);
@@ -297,6 +300,8 @@ else { // else there is school
             _init_date = today.getDate();
         }
         time_left = days_left * day_time + timeTillEndOfDay(today);
+        console.log(days_left)
+        console.log(time_left)
         time_left_total_percent = Math.floor(((1 - (time_left/total_time_year)) * 100000)) / 1000
         // let convertedTime = convertTime(time_left);
         time_converter(time_left, arr)
@@ -319,6 +324,7 @@ else { // else there is school
             arr[3] + "s " + (arr[4] || "") +
             ((arr[4] && "ms ") || "");
         document.getElementById("schedule").innerHTML = times_to_next[0];
+
 
 
         if (count % 2000 === 0) {
